@@ -26,4 +26,21 @@ class CreateUserTableTest extends TestCase
             'id', 'name', 'email', 'email_verified_at', 'password', 'remember_token', 'created_at', 'updated_at',
         ]));
     }
+
+    /**
+     * Test if the users table is dropped.
+     *
+     * @return void
+     */
+    public function testDropUserTable(): void
+    {
+        // Run the migration
+        Artisan::call('migrate');
+
+        // Drop the table
+        Artisan::call('migrate:rollback');
+
+        // Assert that the table doesn't exist
+        $this->assertFalse(Schema::hasTable('users'));
+    }
 }

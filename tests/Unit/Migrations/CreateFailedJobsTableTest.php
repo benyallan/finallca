@@ -43,7 +43,7 @@ class CreateFailedJobsTableTest extends TestCase
     }
 
     /**
-     * Test if the personal access tokens table is dropped.
+     * Test if the failed jobs table is dropped.
      *
      * @return void
      */

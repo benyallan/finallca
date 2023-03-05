@@ -28,7 +28,7 @@ class CreatePasswordResetTokensTableTest extends TestCase
     }
 
     /**
-     * Test if the personal access tokens table is dropped.
+     * Test if the password reset tokens table is dropped.
      *
      * @return void
      */
