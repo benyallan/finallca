@@ -24,20 +24,25 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('id')
-                    ->required()
-                    ->maxLength(36),
+                    ->maxLength(36)
+                    ->disabled()
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Nome'),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
+                    ->maxLength(255)
+                    ->label('E-mail'),
+                Forms\Components\DateTimePicker::make('email_verified_at')
+                    ->label('E-mail verificado'),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Senha'),
             ]);
     }
 
@@ -45,17 +50,27 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('id')->hidden(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nome'),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('E-mail'),
                 Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->hidden()
+                    ->label('E-mail verificado'),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->hidden()
+                    ->label('Excluído em'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->hidden()
+                    ->label('Criado em'),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->hidden()
+                    ->label('Última atualização'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -63,6 +78,7 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
