@@ -33,4 +33,3 @@ class UserFactoryTest extends TestCase
         $this->assertNotEmpty($user->remember_token);
     }
 }
-

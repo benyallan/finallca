@@ -29,8 +29,6 @@ class CreatePasswordResetTokensTableTest extends TestCase
 
     /**
      * Test if the password reset tokens table is dropped.
-     *
-     * @return void
      */
     public function testDropPasswordResetTokensTable(): void
     {

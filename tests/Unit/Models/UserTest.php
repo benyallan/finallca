@@ -34,17 +34,16 @@ class UserTest extends TestCase
     }
 
     public function testUserHiddenAttributes()
-{
-    $user = User::factory()->create([
-        'password' => 'password',
-    ]);
+    {
+        $user = User::factory()->create([
+            'password' => 'password',
+        ]);
 
-    $this->assertArrayNotHasKey('password', $user->toArray());
-    $this->assertArrayHasKey('email', $user->toArray());
-    $this->assertArrayNotHasKey('remember_token', $user->toArray());
-    $this->assertArrayNotHasKey('api_token', $user->toArray());
-}
-
+        $this->assertArrayNotHasKey('password', $user->toArray());
+        $this->assertArrayHasKey('email', $user->toArray());
+        $this->assertArrayNotHasKey('remember_token', $user->toArray());
+        $this->assertArrayNotHasKey('api_token', $user->toArray());
+    }
 
     public function testUserCastedAttributes()
     {

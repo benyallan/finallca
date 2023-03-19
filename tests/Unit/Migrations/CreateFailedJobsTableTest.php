@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Migrations;
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
@@ -16,8 +15,6 @@ class CreateFailedJobsTableTest extends TestCase
 
     /**
      * Test if the migration creates the "failed_jobs" table.
-     *
-     * @return void
      */
     public function testCreateFailedJobsTableMigration(): void
     {
@@ -44,8 +41,6 @@ class CreateFailedJobsTableTest extends TestCase
 
     /**
      * Test if the failed jobs table is dropped.
-     *
-     * @return void
      */
     public function testDropFailedJobsTable(): void
     {

@@ -16,8 +16,6 @@ class CreatePersonalAccessTokensTableTest extends TestCase
 
     /**
      * Test if the personal access tokens table is created.
-     *
-     * @return void
      */
     public function testCreatePersonalAccessTokensTable(): void
     {
@@ -44,8 +42,6 @@ class CreatePersonalAccessTokensTableTest extends TestCase
 
     /**
      * Test if the personal access tokens table is dropped.
-     *
-     * @return void
      */
     public function testDropPersonalAccessTokensTable(): void
     {
