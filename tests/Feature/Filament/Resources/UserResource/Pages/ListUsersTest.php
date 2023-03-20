@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Filament\Resources\UserResource\Pages;
 
 use App\Filament\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use Tests\Unit\Filament\Resources\UserResourceTest;
 
 class ListUsersTest extends TestCase
 {
@@ -15,13 +19,14 @@ class ListUsersTest extends TestCase
     {
         parent::setUp();
 
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        Artisan::call('migrate:fresh --seed');
     }
 
     /** @test */
     public function it_can_render_page()
     {
-        $this->get(UserResource::getUrl('index'))->assertSuccessful();
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $this->get(UserResource::getUrl('index'))->assertStatus(403);
     }
 }
