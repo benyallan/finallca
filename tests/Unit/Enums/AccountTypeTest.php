@@ -41,4 +41,3 @@ class AccountTypeTest extends TestCase
         $this->assertEquals($expected, AccountType::values());
     }
 }
-

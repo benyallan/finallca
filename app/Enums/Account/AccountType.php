@@ -30,5 +30,3 @@ enum AccountType: string
         return array_values(array_values(self::toArray()));
     }
 }
-
-

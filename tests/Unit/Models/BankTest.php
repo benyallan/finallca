@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Models;
 
-use App\Models\User;
+use App\Models\Bank;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
-use App\Models\Bank;
-use App\Enums\AccountType;
 
 class BankTest extends TestCase
 {

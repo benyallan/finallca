@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use App\Enums\Account\AccountType;
-use App\Models\User;
+use App\Models\Account;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
-use App\Models\Account;
 
 class AccountTest extends TestCase
 {
