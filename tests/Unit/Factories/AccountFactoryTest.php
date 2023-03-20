@@ -22,14 +22,14 @@ class AccountFactoryTest extends TestCase
         $this->assertNotEmpty($account->bank_id);
         $this->assertNotEmpty($account->number);
         $this->assertNotEmpty($account->limit);
-        $this->assertNotEmpty($account->income);
+        $this->assertIsBool($account->income);
         $this->assertNotEmpty($account->maintenance_fee);
     }
 
     public function testItCanCreateAnAccountWithGivenType()
     {
-        $account = \App\Models\User::factory()
-            ->ofType(App\Enums\AccountType::CURRENT_ACCOUNT)
+        $account = \App\Models\Account::factory()
+            ->ofType(App\Enums\Account\AccountType::CURRENT_ACCOUNT)
             ->create();
 
         $this->assertNotNull($account);
@@ -41,7 +41,7 @@ class AccountFactoryTest extends TestCase
         $this->assertNotEmpty($account->bank_id);
         $this->assertNotEmpty($account->number);
         $this->assertNotEmpty($account->limit);
-        $this->assertNotEmpty($account->income);
+        $this->assertIsBool($account->income);
         $this->assertNotEmpty($account->maintenance_fee);
     }
 }

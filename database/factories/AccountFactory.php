@@ -32,4 +32,18 @@ class AccountFactory extends Factory
             'bank_id' => Bank::factory(),
         ];
     }
+
+    /**
+     * Indicate that the account is of type current account.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Account>
+     */
+    public function ofType(AccountType $accountType): Factory
+    {
+        return $this->state(function (array $attributes) use ($accountType) {
+            return [
+                'type' => $accountType,
+            ];
+        });
+    }
 }
