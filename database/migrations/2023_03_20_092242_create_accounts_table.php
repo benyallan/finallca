@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('bank_id')->constrained();
-            $table->foreignUuid('user_id')->constrained();
+            $table->foreignUuid('bank_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->string('description');
             $table->double('opening_balance');
             $table->double('balance');
