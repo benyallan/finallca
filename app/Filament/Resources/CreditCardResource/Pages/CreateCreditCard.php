@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\CreditCardResource\Pages;
 
 use App\Filament\Resources\CreditCardResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateCreditCard extends CreateRecord

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BankResource\Pages;
-use App\Filament\Resources\BankResource\RelationManagers;
 use App\Models\Bank;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -62,14 +61,14 @@ class BankResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -78,8 +77,8 @@ class BankResource extends Resource
             'view' => Pages\ViewBank::route('/{record}'),
             'edit' => Pages\EditBank::route('/{record}/edit'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

@@ -117,7 +117,7 @@ class UserResource extends Resource
     }
 
     public static function getPluralModelLabel(): string
-{
-    return __('filament_resources.user.users');
-}
+    {
+        return __('filament_resources.user.users');
+    }
 }

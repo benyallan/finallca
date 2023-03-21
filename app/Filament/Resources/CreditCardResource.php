@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CreditCardResource\Pages;
-use App\Filament\Resources\CreditCardResource\RelationManagers;
 use App\Models\CreditCard;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -46,14 +44,14 @@ class CreditCardResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -62,8 +60,8 @@ class CreditCardResource extends Resource
             'view' => Pages\ViewCreditCard::route('/{record}'),
             'edit' => Pages\EditCreditCard::route('/{record}/edit'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

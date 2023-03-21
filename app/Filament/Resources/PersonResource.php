@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PersonResource\Pages;
-use App\Filament\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
-use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -46,14 +44,14 @@ class PersonResource extends Resource
                 Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -62,8 +60,8 @@ class PersonResource extends Resource
             'view' => Pages\ViewPerson::route('/{record}'),
             'edit' => Pages\EditPerson::route('/{record}/edit'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

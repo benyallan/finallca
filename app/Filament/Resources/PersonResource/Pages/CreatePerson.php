@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\PersonResource\Pages;
 
 use App\Filament\Resources\PersonResource;
-use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreatePerson extends CreateRecord
