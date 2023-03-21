@@ -1,23 +1,20 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\BankResource\RelationManagers;
 
-use App\Enums\Account\AccountType;
-use App\Filament\Resources\AccountResource\Pages;
-use App\Models\Account;
-use Filament\Resources\Form;
 use Filament\Forms;
-use Filament\Resources\Resource;
+use Filament\Resources\Form;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AccountResource extends Resource
+class AccountsRelationManager extends RelationManager
 {
-    protected static ?string $model = Account::class;
+    protected static string $relationship = 'accounts';
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $recordTitleAttribute = 'accounts';
 
     public static function form(Form $form): Form
     {
@@ -59,87 +56,36 @@ class AccountResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->hidden(),
                 Tables\Columns\TextColumn::make('description')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.description')),
-                Tables\Columns\TextColumn::make('opening_balance')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.opening_balance')),
-                Tables\Columns\TextColumn::make('balance')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.balance')),
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.type')),
-                Tables\Columns\TextColumn::make('number')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.number')),
-                Tables\Columns\TextColumn::make('limit')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.limit')),
-                Tables\Columns\ToggleColumn::make('income')
-                    ->disabled()
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.income')),
-                Tables\Columns\TextColumn::make('maintenance_fee')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.maintenance_fee')),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                //
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
             ]);
     }
 
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListAccounts::route('/'),
-            'create' => Pages\CreateAccount::route('/create'),
-            'view' => Pages\ViewAccount::route('/{record}'),
-            'edit' => Pages\EditAccount::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
-
-    public static function getLabel(): string
+    public static function getModelLabel(): string
     {
         return __('filament_resources.account.account');
     }
 
-    public static function getPluralLabel(): string
+    public static function getPluralModelLabel(): string
     {
         return __('filament_resources.account.accounts');
     }
