@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class BankTest extends TestCase
+class CreateBankTableTest extends TestCase
 {
     use RefreshDatabase;
 

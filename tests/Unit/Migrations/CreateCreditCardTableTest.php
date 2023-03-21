@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class CreditCardTest extends TestCase
+class CreateCreditCardTableTest extends TestCase
 {
     use RefreshDatabase;
 
