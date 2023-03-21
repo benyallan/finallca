@@ -26,4 +26,19 @@ return [
             'phone_number' => 'Telefone',
         ],
     ],
+    'credit_card' => [
+        'credit_card' => 'cartão de crédito',
+        'credit_cards' => 'cartões de crédito',
+        'columns' => [
+            'created_at' => 'Criado em',
+            'deleted_at' => 'Excluído em',
+            'updated_at' => 'Última atualização',
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'closing_day' => 'Dia de fechamento',
+            'due_day' => 'Dia de vencimento',
+            'limit' => 'Limite',
+            'direct_debit' => 'Débito automático',
+        ],
+    ],
 ];
