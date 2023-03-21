@@ -53,7 +53,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('filament_resources.user.columns.name')),
                 Tables\Columns\TextColumn::make('email')
-                    ->label('E-mail'),
+                    ->label(__('filament_resources.user.columns.email')),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->hidden()
