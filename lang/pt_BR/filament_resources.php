@@ -14,4 +14,16 @@ return [
             'password' => 'Senha',
         ],
     ],
+    'person' => [
+        'person' => 'Pessoa',
+        'people' => 'Pessoas',
+        'columns' => [
+            'created_at' => 'Criado em',
+            'deleted_at' => 'Excluído em',
+            'updated_at' => 'Última atualização',
+            'email' => 'E-mail',
+            'name' => 'Nome',
+            'phone_number' => 'Telefone',
+        ],
+    ],
 ];

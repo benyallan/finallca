@@ -14,4 +14,16 @@ return [
             'password' => 'Password',
         ],
     ],
+    'person' => [
+        'person' => 'person',
+        'people' => 'people',
+        'columns' => [
+            'created_at' => 'Created at',
+            'deleted_at' => 'Deleted at',
+            'updated_at' => 'Updated at',
+            'email' => 'E-mail',
+            'name' => 'Name',
+            'phone_number' => 'Phone number',
+        ],
+    ],
 ];

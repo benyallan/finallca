@@ -51,8 +51,12 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->hidden(),
                 Tables\Columns\TextColumn::make('name')
+                    ->sortable()
+                    ->searchable()
                     ->label(__('filament_resources.user.columns.name')),
                 Tables\Columns\TextColumn::make('email')
+                    ->sortable()
+                    ->searchable()
                     ->label(__('filament_resources.user.columns.email')),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
