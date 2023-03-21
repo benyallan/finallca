@@ -41,4 +41,15 @@ return [
             'direct_debit' => 'Direct debit',
         ],
     ],
+    'bank' => [
+        'bank' => 'bank',
+        'banks' => 'banks',
+        'columns' => [
+            'created_at' => 'Created at',
+            'deleted_at' => 'Deleted at',
+            'updated_at' => 'Updated at',
+            'number' => 'Number',
+            'name' => 'Name',
+        ],
+    ],
 ];

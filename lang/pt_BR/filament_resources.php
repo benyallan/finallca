@@ -41,4 +41,15 @@ return [
             'direct_debit' => 'Débito automático',
         ],
     ],
+    'bank' => [
+        'bank' => 'banco',
+        'banks' => 'bancos',
+        'columns' => [
+            'created_at' => 'Criado em',
+            'deleted_at' => 'Excluído em',
+            'updated_at' => 'Última atualização',
+            'number' => 'Número',
+            'name' => 'Nome',
+        ],
+    ],
 ];

@@ -22,15 +22,18 @@ class BankResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('uuid')
-                    ->required()
-                    ->maxLength(36),
+                Forms\Components\TextInput::make('id')
+                    ->maxLength(36)
+                    ->disabled()
+                    ->hiddenOn('create'),
                 Forms\Components\TextInput::make('number')
                     ->required()
-                    ->maxLength(3),
+                    ->maxLength(3)
+                    ->label(__('filament_resources.bank.columns.number')),
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(50),
+                    ->maxLength(50)
+                    ->label(__('filament_resources.bank.columns.name')),
             ]);
     }
 
@@ -38,15 +41,24 @@ class BankResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('uuid'),
-                Tables\Columns\TextColumn::make('number'),
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('id')->hidden(),
+                Tables\Columns\TextColumn::make('number')
+                    ->searchable()
+                    ->sortable()
+                    ->label(__('filament_resources.bank.columns.number')),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->sortable()
+                    ->label(__('filament_resources.bank.columns.name')),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->hidden(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->hidden(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->hidden(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -54,6 +66,7 @@ class BankResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -85,5 +98,15 @@ class BankResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    public static function getLabel(): string
+    {
+        return __('filament_resources.bank.bank');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('filament_resources.bank.banks');
     }
 }
