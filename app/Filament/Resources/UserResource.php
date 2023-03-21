@@ -18,10 +18,6 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $modelLabel = 'usuário';
-
-    protected static ?string $pluralModelLabel = 'usuários';
-
     public static function form(Form $form): Form
     {
         return $form
@@ -33,19 +29,19 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->label('Nome'),
+                    ->label(__('filament_resources.user.columns.name')),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
                     ->maxLength(255)
-                    ->label('E-mail'),
+                    ->label(__('filament_resources.user.columns.email')),
                 Forms\Components\DateTimePicker::make('email_verified_at')
-                    ->label('E-mail verificado'),
+                    ->label(__('filament_resources.user.columns.email_verified_at')),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
                     ->maxLength(255)
-                    ->label('Senha'),
+                    ->label(__('filament_resources.user.columns.password')),
             ]);
     }
 
@@ -55,25 +51,25 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->hidden(),
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Nome'),
+                    ->label(__('filament_resources.user.columns.name')),
                 Tables\Columns\TextColumn::make('email')
                     ->label('E-mail'),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->hidden()
-                    ->label('E-mail verificado'),
+                    ->label(__('filament_resources.user.columns.email_verified_at')),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->hidden()
-                    ->label('Excluído em'),
+                    ->label(__('filament_resources.user.columns.deleted_at')),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->hidden()
-                    ->label('Criado em'),
+                    ->label(__('filament_resources.user.columns.created_at')),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->hidden()
-                    ->label('Última atualização'),
+                    ->label(__('filament_resources.user.columns.updated_at')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -114,4 +110,14 @@ class UserResource extends Resource
                 SoftDeletingScope::class,
             ]);
     }
+
+    public static function getModelLabel(): string
+    {
+        return __('filament_resources.user.user');
+    }
+
+    public static function getPluralModelLabel(): string
+{
+    return __('filament_resources.user.users');
+}
 }
