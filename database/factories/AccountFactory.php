@@ -3,8 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\Account\AccountType;
-use App\Models\Bank;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,8 +26,9 @@ class AccountFactory extends Factory
             'limit' => $this->faker->randomFloat(2, 0, 1000),
             'income' => $this->faker->boolean,
             'maintenance_fee' => $this->faker->randomFloat(2, 0, 10),
-            'user_id' => User::factory(),
-            'bank_id' => Bank::factory(),
+            'user_id' => \App\Models\User::factory(),
+            'bank_id' => \App\Models\Bank::factory(),
+            'person_id' => \App\Models\Person::factory(),
         ];
     }
 

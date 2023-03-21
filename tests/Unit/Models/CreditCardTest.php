@@ -6,6 +6,7 @@ namespace Tests\Unit\Models;
 
 use App\Models\CreditCard;
 use App\Models\Bank;
+use App\Models\Person;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -26,6 +27,7 @@ class CreditCardTest extends TestCase
     {
         $user = User::factory()->create();
         $bank = Bank::factory()->create();
+        $person = Person::factory()->create();
 
         $creditCard = CreditCard::factory()->create([
             'name' => 'Cartão do John',
@@ -36,6 +38,7 @@ class CreditCardTest extends TestCase
             'user_id' => $user->id,
             'bank_id' => $bank->id,
             'direct_debit' => true,
+            'person_id' => $person->id,
         ]);
 
         $this->assertEquals('Cartão do John', $creditCard->name);
@@ -46,6 +49,7 @@ class CreditCardTest extends TestCase
         $this->assertEquals($user->id, $creditCard->user_id);
         $this->assertEquals($bank->id, $creditCard->bank_id);
         $this->assertEquals(true, $creditCard->direct_debit);
+        $this->assertEquals($person->id, $creditCard->person_id);
     }
 
     public function testCreditCardCastedAttributes()
@@ -60,5 +64,6 @@ class CreditCardTest extends TestCase
         $this->assertIsString($creditCard->user_id);
         $this->assertIsString($creditCard->bank_id);
         $this->assertIsBool($creditCard->direct_debit);
+        $this->assertIsString($creditCard->person_id);
     }
 }

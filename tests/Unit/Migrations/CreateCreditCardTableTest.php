@@ -29,6 +29,7 @@ class CreateCreditCardTableTest extends TestCase
             'user_id',
             'bank_id',
             'direct_debit',
+            'person_id',
             'created_at',
             'updated_at',
             'deleted_at',

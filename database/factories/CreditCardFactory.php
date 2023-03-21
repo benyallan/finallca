@@ -25,6 +25,7 @@ class CreditCardFactory extends Factory
             'user_id' => \App\Models\User::factory(),
             'bank_id' => \App\Models\Bank::factory(),
             'direct_debit' => $this->faker->boolean,
+            'person_id' => \App\Models\Person::factory(),
         ];
     }
 }

@@ -41,4 +41,9 @@ class CreditCard extends Model
     {
         return $this->belongsTo(Bank::class);
     }
+
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(Person::class);
+    }
 }
