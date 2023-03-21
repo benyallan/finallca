@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
             'password' => 'teste123',
         ]);
 
+        User::create([
+            'name' => 'Carina Rolim',
+            'email' => 'crdo_88@hotmail.com',
+            'password' => 'teste123',
+        ]);
+
         Account::factory()->count(1)->create();
         CreditCard::factory()->count(1)->create();
     }

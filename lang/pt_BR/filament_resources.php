@@ -52,4 +52,22 @@ return [
             'name' => 'Nome',
         ],
     ],
+    'account' => [
+        'account' => 'conta',
+        'accounts' => 'contas',
+        'columns' => [
+            'created_at' => 'Criado em',
+            'deleted_at' => 'Excluído em',
+            'updated_at' => 'Última atualização',
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'opening_balance' => 'Saldo inicial',
+            'balance' => 'Saldo',
+            'type' => 'Tipo',
+            'number' => 'Número',
+            'limit' => 'Limite',
+            'income' => 'Com rendimento',
+            'maintenance_fee' => 'Taxa de manutenção',
+        ],
+    ],
 ];

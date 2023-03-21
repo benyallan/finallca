@@ -52,4 +52,21 @@ return [
             'name' => 'Name',
         ],
     ],
+    'account' => [
+        'account' => 'account',
+        'accounts' => 'accounts',
+        'columns' => [
+            'created_at' => 'Created at',
+            'deleted_at' => 'Deleted at',
+            'updated_at' => 'Updated at',
+            'description' => 'Description',
+            'opening_balance' => 'Opening balance',
+            'balance' => 'Balance',
+            'type' => 'Type',
+            'number' => 'Number',
+            'limit' => 'Limit',
+            'income' => 'Income',
+            'maintenance_fee' => 'Maintenance fee',
+        ],
+    ],
 ];
