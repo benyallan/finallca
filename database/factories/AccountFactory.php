@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Account>
  */
-class AccountFactory extends Factory
+class AccountFactory extends ModelFactory
 {
     /**
      * Define the model's default state.
@@ -26,7 +26,7 @@ class AccountFactory extends Factory
             'limit' => $this->faker->randomFloat(2, 0, 1000),
             'income' => $this->faker->boolean,
             'maintenance_fee' => $this->faker->randomFloat(2, 0, 10),
-            // 'user_id' => \App\Models\User::factory(),
+            'user_id' => \App\Models\User::factory(),
             'bank_id' => \App\Models\Bank::factory(),
             'person_id' => \App\Models\Person::factory(),
         ];

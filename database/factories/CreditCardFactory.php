@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CreditCard>
  */
-class CreditCardFactory extends Factory
+class CreditCardFactory extends ModelFactory
 {
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class CreditCardFactory extends Factory
             'closing_day' => $this->faker->numberBetween(1, 28),
             'due_day' => $this->faker->numberBetween(1, 28),
             'limit' => $this->faker->randomFloat(2, 100, 10000),
-            // 'user_id' => \App\Models\User::factory(),
+            'user_id' => \App\Models\User::factory(),
             'bank_id' => \App\Models\Bank::factory(),
             'direct_debit' => $this->faker->boolean,
             'person_id' => \App\Models\Person::factory(),

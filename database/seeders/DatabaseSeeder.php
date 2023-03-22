@@ -18,27 +18,49 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $users[] = User::create([
             'name' => 'Beny Allan',
             'email' => 'benyallan@gmail.com',
             'password' => 'teste123',
         ]);
 
-        User::create([
+        $users[] = User::create([
             'name' => 'Carina Rolim',
             'email' => 'crdo_88@hotmail.com',
             'password' => 'teste123',
         ]);
 
-        $persons = Person::factory(3)->create();
+        $this->createDataForUser($users);
+    }
 
-        foreach ($persons as $person) {
-            $banks = Bank::factory(2)->create();
+    private function createDataForUser(array|User $user): void
+    {
+        if ($user instanceof User) {
+            $persons = Person::factory(3)->forUser($user)->create();
 
-            foreach ($banks as $bank) {
-                Account::factory(2)->forPerson($person)->fromBank($bank)->create();
+            foreach ($persons as $person) {
+                $banks = Bank::factory(2)
+                    ->forUser($user)
+                    ->create();
+
+                foreach ($banks as $bank) {
+                    Account::factory(2)
+                        ->forPerson($person)
+                        ->forUser($user)
+                        ->fromBank($bank)
+                        ->create();
+                }
+                CreditCard::factory(2)
+                    ->forPerson($person)
+                    ->forUser($user)
+                    ->withBank()
+                    ->create();
             }
-            CreditCard::factory(2)->forPerson($person)->withBank()->create();
+            return;
+        }
+
+        foreach ($user as $user) {
+            $this->createDataForUser($user);
         }
     }
 }

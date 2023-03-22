@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Bank>
  */
-class BankFactory extends Factory
+class BankFactory extends ModelFactory
 {
     /**
      * Define the model's default state.
@@ -19,6 +19,7 @@ class BankFactory extends Factory
         return [
             'number' => $this->faker->unique()->numberBetween(1, 999),
             'name' => $this->faker->unique()->company,
+            'user_id' => \App\Models\User::factory(),
         ];
     }
 }

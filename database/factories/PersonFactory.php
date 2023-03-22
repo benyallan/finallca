@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Person>
  */
-class PersonFactory extends Factory
+class PersonFactory extends ModelFactory
 {
     /**
      * Define the model's default state.
@@ -20,6 +20,7 @@ class PersonFactory extends Factory
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'phone_number' => $this->faker->unique()->phoneNumber,
+            'user_id' => \App\Models\User::factory(),
         ];
     }
 }
