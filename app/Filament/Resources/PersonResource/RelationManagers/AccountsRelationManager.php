@@ -62,6 +62,10 @@ class AccountsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.description')),
+                Tables\Columns\TextColumn::make('bank.name')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.bank.columns.name')),
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
                     ->searchable()
@@ -74,6 +78,7 @@ class AccountsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
