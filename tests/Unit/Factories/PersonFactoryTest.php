@@ -11,13 +11,12 @@ class PersonFactoryTest extends TestCase
 
     public function testItCanCreateAPersonWithDefaultAttributes()
     {
-        $user = \App\Models\User::factory()->create();
+        $person = \App\Models\Person::factory()->create();
 
-        $this->assertNotNull($user);
-        $this->assertNotEmpty($user->name);
-        $this->assertNotEmpty($user->email);
-        $this->assertNotEmpty($user->password);
-        $this->assertNotNull($user->email_verified_at);
-        $this->assertNotEmpty($user->remember_token);
+        $this->assertNotNull($person);
+        $this->assertNotEmpty($person->name);
+        $this->assertNotEmpty($person->email);
+        $this->assertNotEmpty($person->phone_number);
+        $this->assertInstanceOf(\App\Models\User::class, $person->user);
     }
 }

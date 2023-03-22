@@ -30,7 +30,7 @@ class CreditCardTest extends TestCase
         $person = Person::factory()->create();
 
         $creditCard = CreditCard::factory()->create([
-            'name' => 'Cartão do John',
+            'brand' => 'Cartão do John',
             'description' => 'Cartão de crédito do John',
             'closing_day' => 10,
             'due_day' => 20,
@@ -41,7 +41,7 @@ class CreditCardTest extends TestCase
             'person_id' => $person->id,
         ]);
 
-        $this->assertEquals('Cartão do John', $creditCard->name);
+        $this->assertEquals('Cartão do John', $creditCard->brand);
         $this->assertEquals('Cartão de crédito do John', $creditCard->description);
         $this->assertEquals(10, $creditCard->closing_day);
         $this->assertEquals(20, $creditCard->due_day);
@@ -56,7 +56,7 @@ class CreditCardTest extends TestCase
     {
         $creditCard = CreditCard::factory()->create();
 
-        $this->assertIsString($creditCard->name);
+        $this->assertIsString($creditCard->brand);
         $this->assertIsString($creditCard->description);
         $this->assertIsInt($creditCard->closing_day);
         $this->assertIsInt($creditCard->due_day);

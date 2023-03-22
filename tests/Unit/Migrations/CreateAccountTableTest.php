@@ -20,10 +20,22 @@ class CreateAccountTableTest extends TestCase
         $this->assertTrue(Schema::hasTable('accounts'));
 
         $this->assertTrue(Schema::hasColumns('accounts', [
-            'id', 'description', 'opening_balance', 'balance', 'type',
-            'user_id', 'bank_id', 'number', 'person_id',
-            'limit', 'income', 'maintenance_fee',
-            'created_at', 'updated_at', 'deleted_at',
+            'id',
+            'user_id',
+            'description',
+            'opening_balance',
+            'balance',
+            'type',
+            'user_id',
+            'bank_id',
+            'number',
+            'person_id',
+            'limit',
+            'income',
+            'maintenance_fee',
+            'created_at',
+            'updated_at',
+            'deleted_at',
         ]));
     }
 

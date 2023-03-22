@@ -21,7 +21,7 @@ class CreateCreditCardTableTest extends TestCase
 
         $this->assertTrue(Schema::hasColumns('credit_cards', [
             'id',
-            'name',
+            'brand',
             'description',
             'closing_day',
             'due_day',

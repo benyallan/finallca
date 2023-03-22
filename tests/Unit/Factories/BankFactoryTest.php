@@ -16,5 +16,6 @@ class BankFactoryTest extends TestCase
         $this->assertNotNull($bank);
         $this->assertNotEmpty($bank->number);
         $this->assertNotEmpty($bank->name);
+        $this->assertInstanceOf(\App\Models\User::class, $bank->user);
     }
 }

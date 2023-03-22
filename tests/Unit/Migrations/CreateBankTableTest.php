@@ -20,7 +20,7 @@ class CreateBankTableTest extends TestCase
         $this->assertTrue(Schema::hasTable('banks'));
 
         $this->assertTrue(Schema::hasColumns('banks', [
-            'number', 'name',
+            'number', 'name', 'user_id',
             'created_at', 'updated_at', 'deleted_at',
         ]));
     }
