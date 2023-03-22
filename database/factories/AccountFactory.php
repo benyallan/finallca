@@ -26,7 +26,7 @@ class AccountFactory extends Factory
             'limit' => $this->faker->randomFloat(2, 0, 1000),
             'income' => $this->faker->boolean,
             'maintenance_fee' => $this->faker->randomFloat(2, 0, 10),
-            'user_id' => \App\Models\User::factory(),
+            // 'user_id' => \App\Models\User::factory(),
             'bank_id' => \App\Models\Bank::factory(),
             'person_id' => \App\Models\Person::factory(),
         ];
@@ -42,6 +42,24 @@ class AccountFactory extends Factory
         return $this->state(function (array $attributes) use ($accountType) {
             return [
                 'type' => $accountType,
+            ];
+        });
+    }
+
+    public function fromBank(\App\Models\Bank $bank): Factory
+    {
+        return $this->state(function (array $attributes) use ($bank) {
+            return [
+                'bank_id' => $bank->id,
+            ];
+        });
+    }
+
+    public function forPerson(\App\Models\Person $person): Factory
+    {
+        return $this->state(function (array $attributes) use ($person) {
+            return [
+                'person_id' => $person->id,
             ];
         });
     }

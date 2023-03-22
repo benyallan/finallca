@@ -28,4 +28,31 @@ class CreditCardFactory extends Factory
             'person_id' => \App\Models\Person::factory(),
         ];
     }
+
+    public function fromBank(\App\Models\Bank $bank): Factory
+    {
+        return $this->state(function (array $attributes) use ($bank) {
+            return [
+                'bank_id' => $bank->id,
+            ];
+        });
+    }
+
+    public function forPerson(\App\Models\Person $person): Factory
+    {
+        return $this->state(function (array $attributes) use ($person) {
+            return [
+                'person_id' => $person->id,
+            ];
+        });
+    }
+
+    public function withBank(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'bank_id' => null,
+            ];
+        });
+    }
 }

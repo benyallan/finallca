@@ -54,7 +54,32 @@ class CreditcardsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('creditcards'),
+                Tables\Columns\TextColumn::make('id')->hidden(),
+                Tables\Columns\TextColumn::make('brand')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.credit_card.columns.brand')),
+                Tables\Columns\TextColumn::make('description')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.credit_card.columns.description')),
+                Tables\Columns\TextColumn::make('closing_day')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.credit_card.columns.closing_day')),
+                Tables\Columns\TextColumn::make('due_day')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.credit_card.columns.due_day')),
+                Tables\Columns\TextColumn::make('limit')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.credit_card.columns.limit')),
+                Tables\Columns\ToggleColumn::make('direct_debit')
+                    ->sortable()
+                    ->searchable()
+                    ->disabled()
+                    ->label(__('filament_resources.credit_card.columns.direct_debit')),
             ])
             ->filters([
                 //
