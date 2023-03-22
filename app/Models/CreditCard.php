@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\UserScope;
 use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,5 +42,10 @@ class CreditCard extends Model
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new UserScope);
     }
 }
