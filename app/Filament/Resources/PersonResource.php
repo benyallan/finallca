@@ -79,6 +79,7 @@ class PersonResource extends Resource
     {
         return [
             RelationManagers\AccountsRelationManager::class,
+            RelationManagers\CreditCardsRelationManager::class,
         ];
     }
 

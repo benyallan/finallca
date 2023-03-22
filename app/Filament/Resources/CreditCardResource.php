@@ -26,10 +26,10 @@ class CreditCardResource extends Resource
                     ->maxLength(36)
                     ->disabled()
                     ->hiddenOn('create'),
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('brand')
                     ->required()
                     ->maxLength(50)
-                    ->label(__('filament_resources.credit_card.columns.name')),
+                    ->label(__('filament_resources.credit_card.columns.brand')),
                 Forms\Components\TextInput::make('description')
                     ->required()
                     ->maxLength(50)
@@ -57,10 +57,10 @@ class CreditCardResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->hidden(),
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('brand')
                     ->sortable()
                     ->searchable()
-                    ->label(__('filament_resources.credit_card.columns.name')),
+                    ->label(__('filament_resources.credit_card.columns.brand')),
                 Tables\Columns\TextColumn::make('person.name')
                     ->sortable()
                     ->searchable()

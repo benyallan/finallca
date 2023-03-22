@@ -33,7 +33,7 @@ return [
             'created_at' => 'Created at',
             'deleted_at' => 'Deleted at',
             'updated_at' => 'Updated at',
-            'name' => 'Name',
+            'brand' => 'Brand',
             'description' => 'Description',
             'closing_day' => 'Closing day',
             'due_day' => 'Due day',

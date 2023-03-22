@@ -33,7 +33,7 @@ return [
             'created_at' => 'Criado em',
             'deleted_at' => 'Excluído em',
             'updated_at' => 'Última atualização',
-            'name' => 'Nome',
+            'brand' => 'Bandeira',
             'description' => 'Descrição',
             'closing_day' => 'Dia de fechamento',
             'due_day' => 'Dia de vencimento',

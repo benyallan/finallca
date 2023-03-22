@@ -17,12 +17,12 @@ class CreditCardFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->creditCardType,
+            'brand' => $this->faker->creditCardType,
             'description' => $this->faker->sentence,
             'closing_day' => $this->faker->numberBetween(1, 28),
             'due_day' => $this->faker->numberBetween(1, 28),
             'limit' => $this->faker->randomFloat(2, 100, 10000),
-            'user_id' => \App\Models\User::factory(),
+            // 'user_id' => \App\Models\User::factory(),
             'bank_id' => \App\Models\Bank::factory(),
             'direct_debit' => $this->faker->boolean,
             'person_id' => \App\Models\Person::factory(),
