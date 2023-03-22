@@ -34,14 +34,14 @@ enum AccountType: string
     {
         return match ($value) {
             self::CURRENT_ACCOUNT => self::CURRENT_ACCOUNT,
-            self::SAVING_ACCOUNT =>  self::SAVING_ACCOUNT,
-            self::SALARY_ACCOUNT =>  self::SALARY_ACCOUNT,
-            self::INVESTMENT_ACCOUNT =>  self::INVESTMENT_ACCOUNT,
+            self::SAVING_ACCOUNT => self::SAVING_ACCOUNT,
+            self::SALARY_ACCOUNT => self::SALARY_ACCOUNT,
+            self::INVESTMENT_ACCOUNT => self::INVESTMENT_ACCOUNT,
             default => throw new \InvalidArgumentException('Invalid value'),
         };
     }
 
-    public  static function toFilamentSelectOptions()
+    public static function toFilamentSelectOptions()
     {
         return array_combine(AccountType::getValues(), AccountType::getValues());
     }

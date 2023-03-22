@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
                     ->withBank()
                     ->create();
             }
+
             return;
         }
 

@@ -6,8 +6,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-abstract class ModelFactory extends Factory {
-
+abstract class ModelFactory extends Factory
+{
     public function forUser(\App\Models\User $user): Factory
     {
         return $this->state(function (array $attributes) use ($user) {
@@ -16,6 +16,4 @@ abstract class ModelFactory extends Factory {
             ];
         });
     }
-
 }
-
