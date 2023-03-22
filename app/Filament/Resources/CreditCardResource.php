@@ -61,6 +61,10 @@ class CreditCardResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.credit_card.columns.name')),
+                Tables\Columns\TextColumn::make('person.name')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.person.columns.name')),
                 Tables\Columns\TextColumn::make('description')
                     ->sortable()
                     ->searchable()
