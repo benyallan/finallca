@@ -7,6 +7,9 @@ use App\Filament\Resources\AccountResource\Pages;
 use App\Models\Account;
 use Filament\Resources\Form;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
@@ -23,33 +26,34 @@ class AccountResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                TextInput::make('id')
                     ->maxLength(36)
                     ->disabled()
                     ->hiddenOn('create'),
-                Forms\Components\TextInput::make('description')
+                TextInput::make('description')
                     ->required()
                     ->autofocus()
                     ->label(__('filament_resources.account.columns.description')),
-                Forms\Components\TextInput::make('opening_balance')
+                TextInput::make('opening_balance')
                     ->required()
                     ->label(__('filament_resources.account.columns.opening_balance')),
-                Forms\Components\TextInput::make('balance')
+                TextInput::make('balance')
                     ->required()
                     ->label(__('filament_resources.account.columns.balance')),
-                Forms\Components\TextInput::make('type')
+                Select::make('type')
+                    ->options(AccountType::toFilamentSelectOptions())
                     ->required()
                     ->label(__('filament_resources.account.columns.type')),
-                Forms\Components\TextInput::make('number')
+                TextInput::make('number')
                     ->required()
                     ->label(__('filament_resources.account.columns.number')),
-                Forms\Components\TextInput::make('limit')
+                TextInput::make('limit')
                     ->required()
                     ->label(__('filament_resources.account.columns.limit')),
-                Forms\Components\Toggle::make('income')
+                Toggle::make('income')
                     ->required()
                     ->label(__('filament_resources.account.columns.income')),
-                Forms\Components\TextInput::make('maintenance_fee')
+                TextInput::make('maintenance_fee')
                     ->required()
                     ->label(__('filament_resources.account.columns.maintenance_fee')),
             ]);
@@ -59,15 +63,14 @@ class AccountResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->hidden(),
                 Tables\Columns\TextColumn::make('description')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.description')),
-                Tables\Columns\TextColumn::make('opening_balance')
+                Tables\Columns\TextColumn::make('bank.name')
                     ->sortable()
                     ->searchable()
-                    ->label(__('filament_resources.account.columns.opening_balance')),
+                    ->label(__('filament_resources.bank.bank')),
                 Tables\Columns\TextColumn::make('balance')
                     ->sortable()
                     ->searchable()

@@ -25,8 +25,24 @@ enum AccountType: string
         return $result;
     }
 
-    public static function values(): array
+    public static function getValues(): array
     {
         return array_values(array_values(self::toArray()));
+    }
+
+    public static function fromValue(string $value): self
+    {
+        return match ($value) {
+            self::CURRENT_ACCOUNT => self::CURRENT_ACCOUNT,
+            self::SAVING_ACCOUNT =>  self::SAVING_ACCOUNT,
+            self::SALARY_ACCOUNT =>  self::SALARY_ACCOUNT,
+            self::INVESTMENT_ACCOUNT =>  self::INVESTMENT_ACCOUNT,
+            default => throw new \InvalidArgumentException('Invalid value'),
+        };
+    }
+
+    public  static function toFilamentSelectOptions()
+    {
+        return array_combine(AccountType::getValues(), AccountType::getValues());
     }
 }

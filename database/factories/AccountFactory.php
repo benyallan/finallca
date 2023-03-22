@@ -21,7 +21,7 @@ class AccountFactory extends Factory
             'description' => $this->faker->name,
             'opening_balance' => $this->faker->randomFloat(2, 0, 1000),
             'balance' => $this->faker->randomFloat(2, 0, 1000),
-            'type' => $this->faker->randomElement(AccountType::values()),
+            'type' => $this->faker->randomElement(AccountType::getValues()),
             'number' => $this->faker->numberBetween(100000, 999999),
             'limit' => $this->faker->randomFloat(2, 0, 1000),
             'income' => $this->faker->boolean,

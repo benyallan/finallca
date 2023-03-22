@@ -38,6 +38,6 @@ class AccountTypeTest extends TestCase
             'Conta Investimento',
         ];
 
-        $this->assertEquals($expected, AccountType::values());
+        $this->assertEquals($expected, AccountType::getValues());
     }
 }
