@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('credit_cards', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            // $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignUuid('person_id')->constrained('people')->cascadeOnDelete();
             $table->foreignUuid('bank_id')->nullable();
             $table->string('brand');
