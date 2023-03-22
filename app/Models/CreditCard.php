@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreditCard extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes, HasUser;
 
     protected $fillable = [
         'name',
@@ -31,11 +32,6 @@ class CreditCard extends Model
         'bank_id' => 'string',
         'direct_debit' => 'boolean',
     ];
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     public function bank(): BelongsTo
     {
