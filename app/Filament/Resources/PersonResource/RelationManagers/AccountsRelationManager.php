@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\BankResource\RelationManagers;
+namespace App\Filament\Resources\PersonResource\RelationManagers;
 
 use App\Enums\Account\AccountType;
 use Filament\Forms;

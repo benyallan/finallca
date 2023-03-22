@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PersonResource\Pages;
+use App\Filament\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -77,7 +78,7 @@ class PersonResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\AccountsRelationManager::class,
         ];
     }
 
