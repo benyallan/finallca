@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Transaction\AccountTransactionType;
+use App\Enums\Transaction\CreditCardTransactionType;
 use App\Enums\Transaction\TransactionDirection;
 use App\Enums\Transaction\TransactionStatus;
 use App\Models\Scopes\UserScope;
@@ -10,16 +10,15 @@ use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AccountTransaction extends Model
+class CreditCardTransaction extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes, HasUser;
+    use HasFactory, HasUuids, HasUser, SoftDeletes;
 
     protected $fillable = [
-        'account_id',
         'user_id',
+        'credit_card_id',
         'description',
         'value',
         'type',
@@ -29,19 +28,18 @@ class AccountTransaction extends Model
     ];
 
     protected $casts = [
-        'id' => 'string',
-        'account_id' => 'string',
         'user_id' => 'string',
-        'type' => AccountTransactionType::class,
-        'direction' => TransactionDirection::class,
-        'status' => TransactionStatus::class,
+        'credit_card_id' => 'string',
         'value' => 'decimal:2',
         'date' => 'date',
+        'direction' => TransactionDirection::class,
+        'status' => TransactionStatus::class,
+        'type' => CreditCardTransactionType::class,
     ];
 
-    public function account(): BelongsTo
+    public function creditCard()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(CreditCard::class);
     }
 
     protected static function booted(): void

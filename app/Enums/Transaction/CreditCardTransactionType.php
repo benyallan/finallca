@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Enums\Transaction;
 
-enum AccountTransactionStatus: string
+enum CreditCardTransactionType: string
 {
-    case PENDING = 'pending';
-    case PAID = 'paid';
+    case WITHDRAW = 'Saque';
+    case PAYMENT = 'Pagamento';
+    case REFUND = 'Estorno';
+    case FEE = 'Taxa';
+    case INTEREST = 'Juros';
 
     public static function toArray(): array
     {
@@ -31,8 +34,11 @@ enum AccountTransactionStatus: string
     public static function fromValue(string $value): self
     {
         return match ($value) {
-            self::PENDING => self::PENDING,
-            self::PAID => self::PAID,
+            self::WITHDRAW => self::WITHDRAW,
+            self::PAYMENT => self::PAYMENT,
+            self::REFUND => self::REFUND,
+            self::FEE => self::FEE,
+            self::INTEREST => self::INTEREST,
             default => throw new \InvalidArgumentException('Invalid value'),
         };
     }

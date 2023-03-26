@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Models;
 
-use App\Enums\Transaction\AccountTransactionStatus;
 use App\Enums\Transaction\AccountTransactionType;
 use App\Enums\Transaction\TransactionDirection;
+use App\Enums\Transaction\TransactionStatus;
 use App\Models\Account;
 use App\Models\AccountTransaction;
 use App\Models\User;
@@ -39,7 +39,7 @@ class AccountTransactionTest extends TestCase
             'type' => AccountTransactionType::WITHDRAW,
             'date' => '2021-03-26',
             'direction' => TransactionDirection::OUT,
-            'status' => AccountTransactionStatus::PAID,
+            'status' => TransactionStatus::PAID,
         ]);
 
         $this->assertEquals($account->id, $accountTransaction->account_id);
@@ -49,7 +49,7 @@ class AccountTransactionTest extends TestCase
         $this->assertEquals(AccountTransactionType::WITHDRAW, $accountTransaction->type);
         $this->assertEquals(Carbon::createFromDate('2021-03-26'), $accountTransaction->date);
         $this->assertEquals(TransactionDirection::OUT, $accountTransaction->direction);
-        $this->assertEquals(AccountTransactionStatus::PAID, $accountTransaction->status);
+        $this->assertEquals(TransactionStatus::PAID, $accountTransaction->status);
     }
 
     public function testAccountTransactionCastedAttributes()

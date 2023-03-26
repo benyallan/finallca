@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class CreateAccountTransactionsTableTest extends TestCase
+class CreateCreditCardTransactionsTableTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCreateAccountTransactionsTableMigration(): void
+    public function testCreateCreditCardTransactionsTableMigration(): void
     {
         $fields = [
             'id',
             'user_id',
-            'account_id',
+            'credit_card_id',
             'description',
             'value',
             'type',
@@ -32,21 +32,21 @@ class CreateAccountTransactionsTableTest extends TestCase
 
         Artisan::call('migrate');
 
-        $this->assertTrue(Schema::hasTable('account_transactions'));
+        $this->assertTrue(Schema::hasTable('credit_card_transactions'));
 
         foreach ($fields as $field) {
-            $this->assertTrue(Schema::hasColumn('account_transactions', $field));
+            $this->assertTrue(Schema::hasColumn('credit_card_transactions', $field));
         }
 
-        $this->assertTrue(count(Schema::getColumnListing('account_transactions')) === count($fields));
+        $this->assertTrue(count(Schema::getColumnListing('credit_card_transactions')) === count($fields));
     }
 
-    public function testDropAccountTransactionTable(): void
+    public function testDropCreditCardTransactionTable(): void
     {
         Artisan::call('migrate');
 
         Artisan::call('migrate:rollback');
 
-        $this->assertFalse(Schema::hasTable('account_transactions'));
+        $this->assertFalse(Schema::hasTable('credit_card_transactions'));
     }
 }

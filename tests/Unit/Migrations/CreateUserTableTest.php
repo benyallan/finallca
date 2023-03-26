@@ -31,7 +31,11 @@ class CreateUserTableTest extends TestCase
 
         $this->assertTrue(Schema::hasTable('users'));
 
-        $this->assertEquals(Schema::getColumnListing('users'), $fields);
+        foreach ($fields as $field) {
+            $this->assertTrue(Schema::hasColumn('users', $field));
+        }
+
+        $this->assertEquals(count($fields), count(Schema::getColumnListing('users')));
     }
 
     public function testDropUserTable(): void

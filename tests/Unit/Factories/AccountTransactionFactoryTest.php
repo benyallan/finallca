@@ -24,7 +24,7 @@ class AccountTransactionFactoryTest extends TestCase
         $this->assertNotEmpty($accountTransaction->account_id);
         $this->assertInstanceOf(\App\Enums\Account\AccountTransactionType::class, $accountTransaction->type);
         $this->assertInstanceOf(\App\Enums\Account\AccountTransactionDirection::class, $accountTransaction->direction);
-        $this->assertInstanceOf(\App\Enums\Account\AccountTransactionStatus::class, $accountTransaction->status);
+        $this->assertInstanceOf(\App\Enums\Account\TransactionStatus::class, $accountTransaction->status);
         $this->assertInstanceOf(\App\Models\User::class, $accountTransaction->user);
         $this->assertInstanceOf(\App\Models\Account::class, $accountTransaction->account);
     }
