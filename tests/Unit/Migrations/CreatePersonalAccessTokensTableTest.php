@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Migrations;
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
@@ -17,22 +16,26 @@ class CreatePersonalAccessTokensTableTest extends TestCase
     public function testCreatePersonalAccessTokensTable(): void
     {
         $fields = [
+            'abilities',
+            'created_at',
+            'expires_at',
             'id',
-            'tokenable_type',
-            'tokenable_id',
+            'last_used_at',
             'name',
             'token',
-            'abilities',
-            'last_used_at',
-            'expires_at',
-            'created_at',
+            'tokenable_id',
+            'tokenable_type',
             'updated_at',
         ];
         Artisan::call('migrate');
 
         $this->assertTrue(Schema::hasTable('personal_access_tokens'));
 
-        $this->assertEquals(Schema::getColumnListing('personal_access_tokens'), $fields);
+        foreach ($fields as $field) {
+            $this->assertTrue(Schema::hasColumn('personal_access_tokens', $field));
+        }
+
+        $this->assertTrue(count(Schema::getColumnListing('personal_access_tokens')) === count($fields));
     }
 
     public function testDropPersonalAccessTokensTable(): void

@@ -29,7 +29,11 @@ class CreateFailedJobsTableTest extends TestCase
 
         $this->assertTrue(Schema::hasTable('failed_jobs'));
 
-        $this->assertEquals(Schema::getColumnListing('failed_jobs'), $fields);
+        foreach ($fields as $field) {
+            $this->assertTrue(Schema::hasColumn('failed_jobs', $field));
+        }
+
+        $this->assertTrue(count(Schema::getColumnListing('failed_jobs')) === count($fields));
 
         $this->assertTrue(Schema::getConnection()->getDoctrineSchemaManager()->listTableIndexes('failed_jobs')['failed_jobs_uuid_unique']->isUnique());
     }

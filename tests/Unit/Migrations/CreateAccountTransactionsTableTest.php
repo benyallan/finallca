@@ -9,25 +9,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class CreateAccountTableTest extends TestCase
+class CreateAccountTransactionsTableTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCreateAccountTableMigration(): void
+    public function testCreateAccountTransactionsTableMigration(): void
     {
         $fields = [
             'id',
-            'bank_id',
             'user_id',
-            'person_id',
+            'account_id',
             'description',
-            'opening_balance',
-            'balance',
+            'value',
             'type',
-            'number',
-            'limit',
-            'income',
-            'maintenance_fee',
+            'date',
+            'direction',
+            'status',
             'deleted_at',
             'created_at',
             'updated_at',
@@ -35,13 +32,13 @@ class CreateAccountTableTest extends TestCase
 
         Artisan::call('migrate');
 
-        $this->assertTrue(Schema::hasTable('accounts'));
+        $this->assertTrue(Schema::hasTable('account_transactions'));
 
         foreach ($fields as $field) {
-            $this->assertTrue(Schema::hasColumn('accounts', $field));
+            $this->assertTrue(Schema::hasColumn('account_transactions', $field));
         }
 
-        $this->assertTrue(count(Schema::getColumnListing('accounts')) === count($fields));
+        $this->assertTrue(count(Schema::getColumnListing('account_transactions')) === count($fields));
     }
 
     public function testDropAccountTable(): void
@@ -50,6 +47,6 @@ class CreateAccountTableTest extends TestCase
 
         Artisan::call('migrate:rollback');
 
-        $this->assertFalse(Schema::hasTable('accounts'));
+        $this->assertFalse(Schema::hasTable('account_transactions'));
     }
 }

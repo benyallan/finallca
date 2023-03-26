@@ -28,7 +28,11 @@ class CreateBankTableTest extends TestCase
 
         $this->assertTrue(Schema::hasTable('banks'));
 
-        $this->assertEquals(Schema::getColumnListing('banks'), $fields);
+        foreach ($fields as $field) {
+            $this->assertTrue(Schema::hasColumn('banks', $field));
+        }
+
+        $this->assertTrue(count(Schema::getColumnListing('banks')) === count($fields));
     }
 
     public function testDropBankTable(): void

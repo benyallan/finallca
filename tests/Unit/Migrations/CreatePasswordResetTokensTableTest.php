@@ -18,13 +18,17 @@ class CreatePasswordResetTokensTableTest extends TestCase
         $fields = [
             'email',
             'token',
-            'created_at'
+            'created_at',
         ];
         Artisan::call('migrate');
 
         $this->assertTrue(Schema::hasTable('password_reset_tokens'));
 
-        $this->assertEquals(Schema::getColumnListing('password_reset_tokens'), $fields);
+        foreach ($fields as $field) {
+            $this->assertTrue(Schema::hasColumn('password_reset_tokens', $field));
+        }
+
+        $this->assertTrue(count(Schema::getColumnListing('password_reset_tokens')) === count($fields));
     }
 
     public function testDropPasswordResetTokensTable(): void

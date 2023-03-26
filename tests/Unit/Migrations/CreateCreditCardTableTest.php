@@ -35,7 +35,11 @@ class CreateCreditCardTableTest extends TestCase
 
         $this->assertTrue(Schema::hasTable('credit_cards'));
 
-        $this->assertEquals(Schema::getColumnListing('credit_cards'), $fields);
+        foreach ($fields as $field) {
+            $this->assertTrue(Schema::hasColumn('credit_cards', $field));
+        }
+
+        $this->assertTrue(count(Schema::getColumnListing('credit_cards')) === count($fields));
     }
 
     public function testDropCreditCardTable(): void
