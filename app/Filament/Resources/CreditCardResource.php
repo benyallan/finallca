@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CreditCardResource\Pages;
+use App\Filament\Resources\CreditCardResource\RelationManagers;
 use App\Models\CreditCard;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -105,7 +106,7 @@ class CreditCardResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'transactions' => RelationManagers\TransactionsRelationManager::class,
         ];
     }
 
