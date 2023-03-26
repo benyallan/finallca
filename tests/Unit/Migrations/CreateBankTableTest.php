@@ -15,14 +15,20 @@ class CreateBankTableTest extends TestCase
 
     public function testCreateBankTableMigration(): void
     {
+        $fields = [
+            'id',
+            'user_id',
+            'number',
+            'name',
+            'deleted_at',
+            'created_at',
+            'updated_at',
+        ];
         Artisan::call('migrate:fresh --seed');
 
         $this->assertTrue(Schema::hasTable('banks'));
 
-        $this->assertTrue(Schema::hasColumns('banks', [
-            'number', 'name', 'user_id',
-            'created_at', 'updated_at', 'deleted_at',
-        ]));
+        $this->assertEquals(Schema::getColumnListing('banks'), $fields);
     }
 
     public function testDropBankTable(): void

@@ -14,22 +14,12 @@ class CreatePersonalAccessTokensTableTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test if the personal access tokens table is created.
-     */
     public function testCreatePersonalAccessTokensTable(): void
     {
-        // Run the migration
-        Artisan::call('migrate');
-
-        // Assert that the table exists
-        $this->assertTrue(Schema::hasTable('personal_access_tokens'));
-
-        // Assert that the columns exist
-        $this->assertTrue(Schema::hasColumns('personal_access_tokens', [
+        $fields = [
             'id',
-            'tokenable_id',
             'tokenable_type',
+            'tokenable_id',
             'name',
             'token',
             'abilities',
@@ -37,21 +27,20 @@ class CreatePersonalAccessTokensTableTest extends TestCase
             'expires_at',
             'created_at',
             'updated_at',
-        ]));
-    }
-
-    /**
-     * Test if the personal access tokens table is dropped.
-     */
-    public function testDropPersonalAccessTokensTable(): void
-    {
-        // Run the migration
+        ];
         Artisan::call('migrate');
 
-        // Drop the table
+        $this->assertTrue(Schema::hasTable('personal_access_tokens'));
+
+        $this->assertEquals(Schema::getColumnListing('personal_access_tokens'), $fields);
+    }
+
+    public function testDropPersonalAccessTokensTable(): void
+    {
+        Artisan::call('migrate');
+
         Artisan::call('migrate:rollback');
 
-        // Assert that the table doesn't exist
         $this->assertFalse(Schema::hasTable('personal_access_tokens'));
     }
 }

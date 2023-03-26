@@ -15,31 +15,31 @@ class CreateUserTableTest extends TestCase
 
     public function testCreateUserTableMigration(): void
     {
-        // Executa a migration
+        $fields = [
+            'id',
+            'name',
+            'email',
+            'email_verified_at',
+            'password',
+            'remember_token',
+            'deleted_at',
+            'created_at',
+            'updated_at',
+        ];
+
         Artisan::call('migrate');
 
-        // Verifica se a tabela "users" existe no banco de dados
         $this->assertTrue(Schema::hasTable('users'));
 
-        // Verifica se as colunas da tabela "users" foram criadas corretamente
-        $this->assertTrue(Schema::hasColumns('users', [
-            'id', 'name', 'email', 'email_verified_at', 'password', 'remember_token', 'created_at', 'updated_at',
-            'deleted_at',
-        ]));
+        $this->assertEquals(Schema::getColumnListing('users'), $fields);
     }
 
-    /**
-     * Test if the users table is dropped.
-     */
     public function testDropUserTable(): void
     {
-        // Run the migration
         Artisan::call('migrate');
 
-        // Drop the table
         Artisan::call('migrate:rollback');
 
-        // Assert that the table doesn't exist
         $this->assertFalse(Schema::hasTable('users'));
     }
 }

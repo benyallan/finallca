@@ -15,20 +15,22 @@ class CreatePersonTableTest extends TestCase
 
     public function testCreatePersonTableMigration(): void
     {
+        $fields = [
+            'id',
+            'user_id',
+            'name',
+            'email',
+            'phone_number',
+            'deleted_at',
+            'created_at',
+            'updated_at',
+        ];
+
         Artisan::call('migrate');
 
         $this->assertTrue(Schema::hasTable('people'));
 
-        $this->assertTrue(Schema::hasColumns('people', [
-            'id',
-            'name',
-            'email',
-            'phone_number',
-            'user_id',
-            'deleted_at',
-            'created_at',
-            'updated_at',
-        ]));
+        $this->assertEquals(Schema::getColumnListing('people'), $fields);
     }
 
     public function testDropPersonTable(): void

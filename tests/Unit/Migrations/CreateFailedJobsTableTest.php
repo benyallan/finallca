@@ -13,19 +13,9 @@ class CreateFailedJobsTableTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test if the migration creates the "failed_jobs" table.
-     */
     public function testCreateFailedJobsTableMigration(): void
     {
-        // Executa a migration
-        Artisan::call('migrate');
-
-        // Verifica se a tabela "failed_jobs" existe no banco de dados
-        $this->assertTrue(Schema::hasTable('failed_jobs'));
-
-        // Verifica se as colunas esperadas existem na tabela "failed_jobs"
-        $this->assertTrue(Schema::hasColumns('failed_jobs', [
+        $fields = [
             'id',
             'uuid',
             'connection',
@@ -33,24 +23,23 @@ class CreateFailedJobsTableTest extends TestCase
             'payload',
             'exception',
             'failed_at',
-        ]));
+        ];
 
-        // Verifica se a coluna "uuid" é única
+        Artisan::call('migrate');
+
+        $this->assertTrue(Schema::hasTable('failed_jobs'));
+
+        $this->assertEquals(Schema::getColumnListing('failed_jobs'), $fields);
+
         $this->assertTrue(Schema::getConnection()->getDoctrineSchemaManager()->listTableIndexes('failed_jobs')['failed_jobs_uuid_unique']->isUnique());
     }
 
-    /**
-     * Test if the failed jobs table is dropped.
-     */
     public function testDropFailedJobsTable(): void
     {
-        // Run the migration
         Artisan::call('migrate');
 
-        // Drop the table
         Artisan::call('migrate:rollback');
 
-        // Assert that the table doesn't exist
         $this->assertFalse(Schema::hasTable('failed_jobs'));
     }
 }

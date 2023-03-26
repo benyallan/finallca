@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Enums\Account;
+namespace App\Enums\Transaction;
 
-enum AccountType: string
+enum TransactionDirection: string
 {
-    case CURRENT_ACCOUNT = 'Conta Corrente';
-    case SAVING_ACCOUNT = 'Conta Poupança';
-    case SALARY_ACCOUNT = 'Conta Salário';
-    case INVESTMENT_ACCOUNT = 'Conta Investimento';
+    case IN = 'in';
+    case OUT = 'out';
 
     public static function toArray(): array
     {
@@ -33,10 +31,8 @@ enum AccountType: string
     public static function fromValue(string $value): self
     {
         return match ($value) {
-            self::CURRENT_ACCOUNT => self::CURRENT_ACCOUNT,
-            self::SAVING_ACCOUNT => self::SAVING_ACCOUNT,
-            self::SALARY_ACCOUNT => self::SALARY_ACCOUNT,
-            self::INVESTMENT_ACCOUNT => self::INVESTMENT_ACCOUNT,
+            self::IN => self::IN,
+            self::OUT => self::OUT,
             default => throw new \InvalidArgumentException('Invalid value'),
         };
     }

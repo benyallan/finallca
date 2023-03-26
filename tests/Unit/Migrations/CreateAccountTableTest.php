@@ -15,28 +15,29 @@ class CreateAccountTableTest extends TestCase
 
     public function testCreateAccountTableMigration(): void
     {
-        Artisan::call('migrate');
-
-        $this->assertTrue(Schema::hasTable('accounts'));
-
-        $this->assertTrue(Schema::hasColumns('accounts', [
+        $fields = [
             'id',
+            'bank_id',
             'user_id',
+            'person_id',
             'description',
             'opening_balance',
             'balance',
             'type',
-            'user_id',
-            'bank_id',
             'number',
-            'person_id',
             'limit',
             'income',
             'maintenance_fee',
+            'deleted_at',
             'created_at',
             'updated_at',
-            'deleted_at',
-        ]));
+        ];
+
+        Artisan::call('migrate');
+
+        $this->assertTrue(Schema::hasTable('accounts'));
+
+        $this->assertEquals(Schema::getColumnListing('accounts'), $fields);
     }
 
     public function testDropAccountTable(): void

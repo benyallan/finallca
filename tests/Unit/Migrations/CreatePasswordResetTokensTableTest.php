@@ -15,30 +15,24 @@ class CreatePasswordResetTokensTableTest extends TestCase
 
     public function testCreatePasswordResetTokensTableMigration(): void
     {
-        // Executa a migration
+        $fields = [
+            'email',
+            'token',
+            'created_at'
+        ];
         Artisan::call('migrate');
 
-        // Verifica se a tabela "password_reset_tokens" existe no banco de dados
         $this->assertTrue(Schema::hasTable('password_reset_tokens'));
 
-        // Verifica se as colunas da tabela "users" foram criadas corretamente
-        $this->assertTrue(Schema::hasColumns('password_reset_tokens', [
-            'email', 'token', 'created_at',
-        ]));
+        $this->assertEquals(Schema::getColumnListing('password_reset_tokens'), $fields);
     }
 
-    /**
-     * Test if the password reset tokens table is dropped.
-     */
     public function testDropPasswordResetTokensTable(): void
     {
-        // Run the migration
         Artisan::call('migrate');
 
-        // Drop the table
         Artisan::call('migrate:rollback');
 
-        // Assert that the table doesn't exist
         $this->assertFalse(Schema::hasTable('password_reset_tokens'));
     }
 }

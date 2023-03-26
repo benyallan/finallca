@@ -15,25 +15,27 @@ class CreateCreditCardTableTest extends TestCase
 
     public function testCreateCreditCardsTableMigration(): void
     {
-        Artisan::call('migrate');
-
-        $this->assertTrue(Schema::hasTable('credit_cards'));
-
-        $this->assertTrue(Schema::hasColumns('credit_cards', [
+        $fields = [
             'id',
+            'user_id',
+            'person_id',
+            'bank_id',
             'brand',
             'description',
             'closing_day',
             'due_day',
             'limit',
-            'user_id',
-            'bank_id',
             'direct_debit',
-            'person_id',
+            'deleted_at',
             'created_at',
             'updated_at',
-            'deleted_at',
-        ]));
+        ];
+
+        Artisan::call('migrate');
+
+        $this->assertTrue(Schema::hasTable('credit_cards'));
+
+        $this->assertEquals(Schema::getColumnListing('credit_cards'), $fields);
     }
 
     public function testDropCreditCardTable(): void
