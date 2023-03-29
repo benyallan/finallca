@@ -31,4 +31,11 @@ class CreditCardTransactionFactory extends ModelFactory
             'status' => $this->faker->randomElement(TransactionStatus::getValues()),
         ];
     }
+
+    public function fromCreditCard(CreditCard $creditCard): self
+    {
+        return $this->state([
+            'credit_card_id' => $creditCard->id,
+        ]);
+    }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('banks', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->string('number', 3)->unique();
             $table->string('name', 50)->unique();
             $table->softDeletes();

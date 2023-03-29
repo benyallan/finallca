@@ -5,8 +5,10 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Account;
+use App\Models\AccountTransaction;
 use App\Models\Bank;
 use App\Models\CreditCard;
+use App\Models\CreditCardTransaction;
 use App\Models\Person;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -44,17 +46,32 @@ class DatabaseSeeder extends Seeder
                     ->create();
 
                 foreach ($banks as $bank) {
-                    Account::factory(2)
+                    $accounts = Account::factory(2)
                         ->forPerson($person)
                         ->forUser($user)
                         ->fromBank($bank)
                         ->create();
                 }
-                CreditCard::factory(2)
+
+                foreach ($accounts as $account) {
+                    AccountTransaction::factory(15)
+                        ->forUser($user)
+                        ->fromAccount($account)
+                        ->create();
+                }
+
+                $creditCards = CreditCard::factory(2)
                     ->forPerson($person)
                     ->forUser($user)
-                    ->withBank()
+                    ->withoutBank()
                     ->create();
+
+                foreach ($creditCards as $creditCard) {
+                    CreditCardTransaction::factory(15)
+                        ->forUser($user)
+                        ->fromCreditCard($creditCard)
+                        ->create();
+                }
             }
 
             return;

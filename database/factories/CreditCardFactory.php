@@ -47,7 +47,7 @@ class CreditCardFactory extends ModelFactory
         });
     }
 
-    public function withBank(): Factory
+    public function withoutBank(): Factory
     {
         return $this->state(function (array $attributes) {
             return [

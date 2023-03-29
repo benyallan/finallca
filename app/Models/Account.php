@@ -19,6 +19,7 @@ class Account extends Model
     use HasFactory, HasUuids, SoftDeletes, HasUser;
 
     protected $fillable = [
+        'user_id',
         'description',
         'opening_balance',
         'balance',

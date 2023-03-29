@@ -32,7 +32,7 @@ class AccountTransactionFactory extends ModelFactory
         ];
     }
 
-    public function forAccount(Account $account): static
+    public function fromAccount(Account $account): static
     {
         return $this->state(fn (array $attributes) => [
             'account_id' => $account->id,
