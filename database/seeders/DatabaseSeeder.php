@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'teste123',
         ]);
 
-        $this->createDataForUser($users);
+        // $this->createDataForUser($users);
     }
 
     private function createDataForUser(array|User $user): void
