@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\PersonResource\RelationManagers;
 
 use App\Enums\Account\AccountType;
+use App\Models\Bank;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -28,11 +29,11 @@ class AccountsRelationManager extends RelationManager
                     ->autofocus()
                     ->label(__('filament_resources.account.columns.description')),
                 Forms\Components\TextInput::make('opening_balance')
-                    ->required()
                     ->label(__('filament_resources.account.columns.opening_balance')),
-                Forms\Components\TextInput::make('balance')
+                Forms\Components\Select::make('bank_id')
+                    ->options(Bank::all()->pluck('name', 'id')->toArray())
                     ->required()
-                    ->label(__('filament_resources.account.columns.balance')),
+                    ->label(__('filament_resources.bank.bank')),
                 Forms\Components\Select::make('type')
                     ->options(AccountType::toFilamentSelectOptions())
                     ->required()
@@ -40,14 +41,11 @@ class AccountsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('number')
                     ->required()
                     ->label(__('filament_resources.account.columns.number')),
-                Forms\Components\TextInput::make('limit')
-                    ->required()
+                Forms\Components\TextInput::make('account_limit')
                     ->label(__('filament_resources.account.columns.limit')),
                 Forms\Components\Toggle::make('income')
-                    ->required()
                     ->label(__('filament_resources.account.columns.income')),
                 Forms\Components\TextInput::make('maintenance_fee')
-                    ->required()
                     ->label(__('filament_resources.account.columns.maintenance_fee')),
             ]);
     }
@@ -63,7 +61,7 @@ class AccountsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('bank.name')
                     ->sortable()
                     ->searchable()
-                    ->label(__('filament_resources.bank.columns.name')),
+                    ->label(__('filament_resources.bank.bank')),
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
                     ->searchable()

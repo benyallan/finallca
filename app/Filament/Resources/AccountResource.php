@@ -47,7 +47,7 @@ class AccountResource extends Resource
                 TextInput::make('number')
                     ->required()
                     ->label(__('filament_resources.account.columns.number')),
-                TextInput::make('limit')
+                TextInput::make('account_limit')
                     ->required()
                     ->label(__('filament_resources.account.columns.limit')),
                 Toggle::make('income')
@@ -84,7 +84,7 @@ class AccountResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.number')),
-                Tables\Columns\TextColumn::make('limit')
+                Tables\Columns\TextColumn::make('account_limit')
                     ->sortable()
                     ->searchable()
                     ->money('brl', true)

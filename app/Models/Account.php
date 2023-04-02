@@ -20,12 +20,13 @@ class Account extends Model
 
     protected $fillable = [
         'user_id',
+        'bank_id',
         'description',
         'opening_balance',
         'balance',
         'type',
         'number',
-        'limit',
+        'account_limit',
         'income',
         'maintenance_fee',
     ];
@@ -33,7 +34,7 @@ class Account extends Model
     protected $casts = [
         'opening_balance' => 'double',
         'balance' => 'double',
-        'limit' => 'double',
+        'account_limit' => 'double',
         'income' => 'boolean',
         'maintenance_fee' => 'float',
         'type' => AccountType::class,

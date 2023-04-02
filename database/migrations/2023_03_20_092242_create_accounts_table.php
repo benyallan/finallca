@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 return new class extends Migration
 {
@@ -17,13 +18,13 @@ return new class extends Migration
             $table->foreignUuid('bank_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('person_id')->constrained()->cascadeOnDelete();
             $table->string('description');
-            $table->double('opening_balance');
-            $table->double('balance');
+            $table->double('opening_balance')->nullable()->default(0.0);
+            $table->double('balance')->nullable();
             $table->string('type');
             $table->string('number');
-            $table->double('limit')->nullable();
+            $table->double('account_limit')->nullable()->default(0.0);
             $table->boolean('income')->default(false);
-            $table->float('maintenance_fee')->default(0);
+            $table->float('maintenance_fee')->nullable()->default(0.0);
             $table->softDeletes();
             $table->timestamps();
         });

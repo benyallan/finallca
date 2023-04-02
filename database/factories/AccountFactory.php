@@ -23,7 +23,7 @@ class AccountFactory extends ModelFactory
             'balance' => $this->faker->randomFloat(2, 0, 1000),
             'type' => $this->faker->randomElement(AccountType::getValues()),
             'number' => $this->faker->numberBetween(100000, 999999),
-            'limit' => $this->faker->randomFloat(2, 0, 1000),
+            'account_limit' => $this->faker->randomFloat(2, 0, 1000),
             'income' => $this->faker->boolean,
             'maintenance_fee' => $this->faker->randomFloat(2, 0, 10),
             'user_id' => \App\Models\User::factory(),

@@ -34,7 +34,7 @@ class CreditCardTest extends TestCase
             'description' => 'Cartão de crédito do John',
             'closing_day' => 10,
             'due_day' => 20,
-            'limit' => 1000,
+            'account_limit' => 1000,
             'user_id' => $user->id,
             'bank_id' => $bank->id,
             'direct_debit' => true,

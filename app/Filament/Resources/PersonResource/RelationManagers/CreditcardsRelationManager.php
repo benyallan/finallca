@@ -38,7 +38,7 @@ class CreditcardsRelationManager extends RelationManager
                     ->required()
                     ->maxLength(50)
                     ->label(__('filament_resources.credit_card.columns.due_day')),
-                Forms\Components\TextInput::make('limit')
+                Forms\Components\TextInput::make('account_limit')
                     ->required()
                     ->maxLength(50)
                     ->label(__('filament_resources.credit_card.columns.limit')),
@@ -69,7 +69,7 @@ class CreditcardsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.credit_card.columns.due_day')),
-                Tables\Columns\TextColumn::make('limit')
+                Tables\Columns\TextColumn::make('account_limit')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.credit_card.columns.limit')),

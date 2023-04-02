@@ -24,7 +24,7 @@ class CreateCreditCardTableTest extends TestCase
             'description',
             'closing_day',
             'due_day',
-            'limit',
+            'account_limit',
             'direct_debit',
             'deleted_at',
             'created_at',

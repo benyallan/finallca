@@ -25,7 +25,7 @@ class CreateAccountTableTest extends TestCase
             'balance',
             'type',
             'number',
-            'limit',
+            'account_limit',
             'income',
             'maintenance_fee',
             'deleted_at',

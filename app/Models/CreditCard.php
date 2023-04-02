@@ -20,7 +20,7 @@ class CreditCard extends Model
         'description',
         'closing_day',
         'due_day',
-        'limit',
+        'account_limit',
         'user_id',
         'bank_id',
         'direct_debit',
@@ -29,7 +29,7 @@ class CreditCard extends Model
     protected $casts = [
         'closing_day' => 'integer',
         'due_day' => 'integer',
-        'limit' => 'float',
+        'account_limit' => 'float',
         'user_id' => 'string',
         'bank_id' => 'string',
         'direct_debit' => 'boolean',

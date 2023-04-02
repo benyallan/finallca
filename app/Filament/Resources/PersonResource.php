@@ -35,10 +35,6 @@ class PersonResource extends Resource
                     ->required()
                     ->maxLength(50)
                     ->label(__('filament_resources.person.columns.email')),
-                Forms\Components\TextInput::make('phone_number')
-                    ->required()
-                    ->maxLength(50)
-                    ->label(__('filament_resources.person.columns.phone_number')),
             ]);
     }
 
@@ -55,10 +51,6 @@ class PersonResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.person.columns.email')),
-                Tables\Columns\TextColumn::make('phone_number')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.person.columns.phone_number')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
