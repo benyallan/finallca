@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\CreditCardResource\RelationManagers;
 
+use Akaunting\Money\Currency;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -62,6 +63,7 @@ class TransactionsRelationManager extends RelationManager
                     ->searchable(),
                 Tables\Columns\TextColumn::make('value')
                     ->label(__('filament_resources.credit_card_transaction.columns.value'))
+                    ->money('brl')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->label(__('filament_resources.credit_card_transaction.columns.type'))

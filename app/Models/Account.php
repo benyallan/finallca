@@ -49,11 +49,6 @@ class Account extends Model
         return $this->belongsTo(Person::class);
     }
 
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new UserScope);
-    }
-
     public function transactions(): HasMany
     {
         return $this->hasMany(AccountTransaction::class);

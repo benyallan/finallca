@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Account;
+use App\Models\Bank;
+use App\Observers\AccountObserver;
+use App\Observers\BankObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Account::observe(AccountObserver::class);
+        Bank::observe(BankObserver::class);
     }
 }

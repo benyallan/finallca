@@ -74,6 +74,7 @@ class AccountResource extends Resource
                 Tables\Columns\TextColumn::make('balance')
                     ->sortable()
                     ->searchable()
+                    ->money('brl', true)
                     ->label(__('filament_resources.account.columns.balance')),
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
@@ -86,6 +87,7 @@ class AccountResource extends Resource
                 Tables\Columns\TextColumn::make('limit')
                     ->sortable()
                     ->searchable()
+                    ->money('brl', true)
                     ->label(__('filament_resources.account.columns.limit')),
                 Tables\Columns\ToggleColumn::make('income')
                     ->disabled()
@@ -94,6 +96,7 @@ class AccountResource extends Resource
                     ->label(__('filament_resources.account.columns.income')),
                 Tables\Columns\TextColumn::make('maintenance_fee')
                     ->sortable()
+                    ->money('brl', true)
                     ->searchable()
                     ->label(__('filament_resources.account.columns.maintenance_fee')),
             ])
@@ -134,7 +137,8 @@ class AccountResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])
+            ->whereBelongsTo(auth()->user());
     }
 
     public static function getLabel(): string

@@ -79,6 +79,7 @@ class CreditCardResource extends Resource
                     ->searchable()
                     ->label(__('filament_resources.credit_card.columns.due_day')),
                 Tables\Columns\TextColumn::make('limit')
+                    ->money('brl')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.credit_card.columns.limit')),

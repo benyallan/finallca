@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
     private function createDataForUser(array|User $user): void
     {
         if ($user instanceof User) {
-            $persons = Person::factory(3)->forUser($user)->create();
+            $persons = Person::factory(2)->forUser($user)->create();
 
             foreach ($persons as $person) {
                 $banks = Bank::factory(2)
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
                 }
 
                 foreach ($accounts as $account) {
-                    AccountTransaction::factory(15)
+                    AccountTransaction::factory(2)
                         ->forUser($user)
                         ->fromAccount($account)
                         ->create();
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
                     ->create();
 
                 foreach ($creditCards as $creditCard) {
-                    CreditCardTransaction::factory(15)
+                    CreditCardTransaction::factory(2)
                         ->forUser($user)
                         ->fromCreditCard($creditCard)
                         ->create();
