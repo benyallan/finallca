@@ -18,13 +18,13 @@ return new class extends Migration
             $table->foreignUuid('bank_id')->constrained()->cascadeOnDelete();
             $table->foreignUuid('person_id')->constrained()->cascadeOnDelete();
             $table->string('description');
-            $table->double('opening_balance')->nullable()->default(0.0);
+            $table->double('opening_balance')->nullable();
             $table->double('balance')->nullable();
             $table->string('type');
             $table->string('number');
-            $table->double('account_limit')->nullable()->default(0.0);
+            $table->double('account_limit')->nullable();
             $table->boolean('income')->default(false);
-            $table->float('maintenance_fee')->nullable()->default(0.0);
+            $table->float('maintenance_fee')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

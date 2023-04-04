@@ -65,8 +65,8 @@ return [
             'type' => 'Tipo',
             'number' => 'Número',
             'account_limit' => 'Limite',
-            'income' => 'Com rendimento',
-            'maintenance_fee' => 'Taxa de manutenção',
+            'income' => 'Tem rendimento',
+            'maintenance_fee' => 'Tarifa de manutenção de conta',
         ],
     ],
     'credit_card_transaction' => [

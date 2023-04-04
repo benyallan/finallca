@@ -6,6 +6,8 @@ use App\Enums\Account\AccountType;
 use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers;
 use App\Models\Account;
+use App\Models\Bank;
+use App\Models\Person;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -35,11 +37,20 @@ class AccountResource extends Resource
                     ->autofocus()
                     ->label(__('filament_resources.account.columns.description')),
                 TextInput::make('opening_balance')
-                    ->required()
+                    ->visibleOn('create')
                     ->label(__('filament_resources.account.columns.opening_balance')),
                 TextInput::make('balance')
-                    ->required()
+                    ->hiddenOn('create')
+                    ->disabled()
                     ->label(__('filament_resources.account.columns.balance')),
+                Select::make('bank_id')
+                    ->options(Bank::all()->pluck('name', 'id')->toArray())
+                    ->required()
+                    ->label(__('filament_resources.bank.bank')),
+                Select::make('person_id')
+                    ->options(Person::all()->pluck('name', 'id')->toArray())
+                    ->required()
+                    ->label(__('filament_resources.person.person')),
                 Select::make('type')
                     ->options(AccountType::toFilamentSelectOptions())
                     ->required()
@@ -48,14 +59,11 @@ class AccountResource extends Resource
                     ->required()
                     ->label(__('filament_resources.account.columns.number')),
                 TextInput::make('account_limit')
-                    ->required()
-                    ->label(__('filament_resources.account.columns.limit')),
-                Toggle::make('income')
-                    ->required()
-                    ->label(__('filament_resources.account.columns.income')),
-                TextInput::make('maintenance_fee')
-                    ->required()
+                    ->label(__('filament_resources.account.columns.account_limit')),
+                    TextInput::make('maintenance_fee')
                     ->label(__('filament_resources.account.columns.maintenance_fee')),
+                Toggle::make('income')
+                    ->label(__('filament_resources.account.columns.income')),
             ]);
     }
 
@@ -88,7 +96,7 @@ class AccountResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->money('brl', true)
-                    ->label(__('filament_resources.account.columns.limit')),
+                    ->label(__('filament_resources.account.columns.account_limit')),
                 Tables\Columns\ToggleColumn::make('income')
                     ->disabled()
                     ->sortable()

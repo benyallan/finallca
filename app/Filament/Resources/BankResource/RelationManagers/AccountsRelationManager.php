@@ -3,7 +3,12 @@
 namespace App\Filament\Resources\BankResource\RelationManagers;
 
 use App\Enums\Account\AccountType;
+use App\Models\Bank;
+use App\Models\Person;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
@@ -19,36 +24,38 @@ class AccountsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                TextInput::make('id')
                     ->maxLength(36)
                     ->disabled()
                     ->hiddenOn('create'),
-                Forms\Components\TextInput::make('description')
+                TextInput::make('description')
                     ->required()
                     ->autofocus()
                     ->label(__('filament_resources.account.columns.description')),
-                Forms\Components\TextInput::make('opening_balance')
-                    ->required()
+                TextInput::make('opening_balance')
+                    ->visibleOn('create')
                     ->label(__('filament_resources.account.columns.opening_balance')),
-                Forms\Components\TextInput::make('balance')
-                    ->required()
+                TextInput::make('balance')
+                    ->hiddenOn('create')
+                    ->disabled()
                     ->label(__('filament_resources.account.columns.balance')),
-                Forms\Components\Select::make('type')
+                Select::make('person_id')
+                    ->options(Person::all()->pluck('name', 'id')->toArray())
+                    ->required()
+                    ->label(__('filament_resources.person.person')),
+                Select::make('type')
                     ->options(AccountType::toFilamentSelectOptions())
                     ->required()
                     ->label(__('filament_resources.account.columns.type')),
-                Forms\Components\TextInput::make('number')
+                TextInput::make('number')
                     ->required()
                     ->label(__('filament_resources.account.columns.number')),
-                Forms\Components\TextInput::make('account_limit')
-                    ->required()
-                    ->label(__('filament_resources.account.columns.limit')),
-                Forms\Components\Toggle::make('income')
-                    ->required()
-                    ->label(__('filament_resources.account.columns.income')),
-                Forms\Components\TextInput::make('maintenance_fee')
-                    ->required()
+                TextInput::make('account_limit')
+                    ->label(__('filament_resources.account.columns.account_limit')),
+                    TextInput::make('maintenance_fee')
                     ->label(__('filament_resources.account.columns.maintenance_fee')),
+                Toggle::make('income')
+                    ->label(__('filament_resources.account.columns.income')),
             ]);
     }
 
