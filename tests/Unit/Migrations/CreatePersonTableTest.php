@@ -20,7 +20,6 @@ class CreatePersonTableTest extends TestCase
             'user_id',
             'name',
             'email',
-            'phone_number',
             'deleted_at',
             'created_at',
             'updated_at',

@@ -16,7 +16,6 @@ class PersonFactoryTest extends TestCase
         $this->assertNotNull($person);
         $this->assertNotEmpty($person->name);
         $this->assertNotEmpty($person->email);
-        $this->assertNotEmpty($person->phone_number);
         $this->assertInstanceOf(\App\Models\User::class, $person->user);
     }
 }

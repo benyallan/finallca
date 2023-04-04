@@ -28,6 +28,7 @@ class CreditCardTest extends TestCase
         $user = User::factory()->create();
         $bank = Bank::factory()->create();
         $person = Person::factory()->create();
+        $this->actingAs($user);
 
         $creditCard = CreditCard::factory()->create([
             'brand' => 'Cartão do John',
@@ -45,7 +46,7 @@ class CreditCardTest extends TestCase
         $this->assertEquals('Cartão de crédito do John', $creditCard->description);
         $this->assertEquals(10, $creditCard->closing_day);
         $this->assertEquals(20, $creditCard->due_day);
-        $this->assertEquals(1000, $creditCard->limit);
+        $this->assertEquals(1000, $creditCard->account_limit);
         $this->assertEquals($user->id, $creditCard->user_id);
         $this->assertEquals($bank->id, $creditCard->bank_id);
         $this->assertEquals(true, $creditCard->direct_debit);
@@ -54,13 +55,14 @@ class CreditCardTest extends TestCase
 
     public function testCreditCardCastedAttributes()
     {
+        $this->actingAs(User::factory()->create());
         $creditCard = CreditCard::factory()->create();
 
         $this->assertIsString($creditCard->brand);
         $this->assertIsString($creditCard->description);
         $this->assertIsInt($creditCard->closing_day);
         $this->assertIsInt($creditCard->due_day);
-        $this->assertIsFloat($creditCard->limit);
+        $this->assertIsFloat($creditCard->account_limit);
         $this->assertIsString($creditCard->user_id);
         $this->assertIsString($creditCard->bank_id);
         $this->assertIsBool($creditCard->direct_debit);

@@ -63,4 +63,13 @@ class AccountFactory extends ModelFactory
             ];
         });
     }
+
+    public function forUser(\App\Models\User $user): Factory
+    {
+        return $this->state(function (array $attributes) use ($user) {
+            return [
+                'user_id' => $user->id,
+            ];
+        });
+    }
 }

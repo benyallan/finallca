@@ -23,7 +23,6 @@ return [
             'updated_at' => 'Última atualização',
             'email' => 'E-mail',
             'name' => 'Nome',
-            'phone_number' => 'Telefone',
         ],
     ],
     'credit_card' => [

@@ -27,13 +27,14 @@ class AccountTest extends TestCase
     {
         $person = Person::factory()->create();
         $user = User::factory()->create();
+        $this->actingAs($user);
 
-        $account = Account::factory()->create([
+        $account = Account::factory()->forUser($user)->create([
+            'id' => '1',
             'opening_balance' => '100',
             'description' => 'Conta do John',
             'type' => AccountType::CURRENT_ACCOUNT,
             'person_id' => $person->id,
-            'user_id' => $user->id,
         ]);
 
         $this->assertEquals('100', $account->opening_balance);

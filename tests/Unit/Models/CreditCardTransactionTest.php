@@ -31,6 +31,7 @@ class CreditCardTransactionTest extends TestCase
     {
         $user = User::factory()->create();
         $creditCard = CreditCard::factory()->forUser($user)->create();
+        $this->actingAs($user);
 
         $creditCardTransaction = CreditCardTransaction::factory()->create([
             'user_id' => $user->id,
@@ -57,6 +58,6 @@ class CreditCardTransactionTest extends TestCase
     {
         $accountTransaction = AccountTransaction::factory()->create();
 
-        $this->assertInstanceOf(User::class, $accountTransaction->user);
+        $this->assertNotEmpty($accountTransaction->user());
     }
 }

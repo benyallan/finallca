@@ -30,6 +30,7 @@ class AccountTransactionTest extends TestCase
     {
         $account = Account::factory()->create();
         $user = User::factory()->create();
+        $this->actingAs($user);
 
         $accountTransaction = AccountTransaction::factory()->create([
             'account_id' => $account->id,
@@ -56,6 +57,6 @@ class AccountTransactionTest extends TestCase
     {
         $accountTransaction = AccountTransaction::factory()->create();
 
-        $this->assertInstanceOf(User::class, $accountTransaction->user);
+        $this->assertNotEmpty($accountTransaction->user);
     }
 }

@@ -24,6 +24,7 @@ class BankTest extends TestCase
     public function testBankHasNameAndNumberAttributes()
     {
         $user = User::factory()->create();
+        $this->actingAs($user);
 
         $bank = Bank::factory()->create([
             'number' => '100',
