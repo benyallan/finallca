@@ -42,7 +42,7 @@ class AccountsRelationManager extends RelationManager
                     ->required()
                     ->label(__('filament_resources.account.columns.number')),
                 Forms\Components\TextInput::make('account_limit')
-                    ->label(__('filament_resources.account.columns.limit')),
+                    ->label(__('filament_resources.account.columns.account_limit')),
                 Forms\Components\Toggle::make('income')
                     ->label(__('filament_resources.account.columns.income')),
                 Forms\Components\TextInput::make('maintenance_fee')
