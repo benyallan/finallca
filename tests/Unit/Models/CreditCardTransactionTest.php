@@ -56,8 +56,9 @@ class CreditCardTransactionTest extends TestCase
 
     public function testCreditCardTransactionCastedAttributes()
     {
+        $this->actingAs(User::factory()->create());
         $accountTransaction = AccountTransaction::factory()->create();
 
-        $this->assertNotEmpty($accountTransaction->user());
+        $this->assertInstanceOf(User::class, $accountTransaction->user);
     }
 }

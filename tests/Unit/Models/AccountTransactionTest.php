@@ -55,8 +55,9 @@ class AccountTransactionTest extends TestCase
 
     public function testAccountTransactionCastedAttributes()
     {
+        $this->actingAs(User::factory()->create());
         $accountTransaction = AccountTransaction::factory()->create();
 
-        $this->assertNotEmpty($accountTransaction->user);
+        $this->assertInstanceOf(User::class, $accountTransaction->user);
     }
 }
