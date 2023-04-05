@@ -15,12 +15,11 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignUuid('person_id')->constrained('people')->cascadeOnDelete();
-            $table->foreignUuid('bank_id')->nullable();
             $table->string('brand');
             $table->string('description');
             $table->integer('closing_day');
             $table->integer('due_day');
-            $table->float('account_limit');
+            $table->float('credit_card_limit');
             $table->boolean('direct_debit');
             $table->softDeletes();
             $table->timestamps();

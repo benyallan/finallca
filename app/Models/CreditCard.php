@@ -17,6 +17,7 @@ class CreditCard extends Model
 
     protected $fillable = [
         'name',
+        'person_id',
         'description',
         'closing_day',
         'due_day',
@@ -31,14 +32,9 @@ class CreditCard extends Model
         'due_day' => 'integer',
         'account_limit' => 'float',
         'user_id' => 'string',
-        'bank_id' => 'string',
+        'person_id' => 'string',
         'direct_debit' => 'boolean',
     ];
-
-    public function bank(): BelongsTo
-    {
-        return $this->belongsTo(Bank::class);
-    }
 
     public function person(): BelongsTo
     {

@@ -10,6 +10,7 @@ use App\Models\Bank;
 use App\Models\Person;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TextInput\Mask;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -38,9 +39,37 @@ class AccountResource extends Resource
                     ->label(__('filament_resources.account.columns.description')),
                 TextInput::make('opening_balance')
                     ->visibleOn('create')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->label(__('filament_resources.account.columns.opening_balance')),
                 TextInput::make('balance')
                     ->hiddenOn('create')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->disabled()
                     ->label(__('filament_resources.account.columns.balance')),
                 Select::make('bank_id')
@@ -59,8 +88,36 @@ class AccountResource extends Resource
                     ->required()
                     ->label(__('filament_resources.account.columns.number')),
                 TextInput::make('account_limit')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->label(__('filament_resources.account.columns.account_limit')),
-                    TextInput::make('maintenance_fee')
+                TextInput::make('maintenance_fee')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->label(__('filament_resources.account.columns.maintenance_fee')),
                 Toggle::make('income')
                     ->label(__('filament_resources.account.columns.income')),

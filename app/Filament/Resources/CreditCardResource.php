@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CreditCardResource\Pages;
 use App\Filament\Resources\CreditCardResource\RelationManagers;
 use App\Models\CreditCard;
+use App\Models\Person;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -27,6 +28,10 @@ class CreditCardResource extends Resource
                     ->maxLength(36)
                     ->disabled()
                     ->hiddenOn('create'),
+                Forms\Components\Select::make('person_id')
+                    ->options(Person::all()->pluck('name', 'id')->toArray())
+                    ->required()
+                    ->label(__('filament_resources.person.person')),
                 Forms\Components\TextInput::make('brand')
                     ->required()
                     ->maxLength(50)
@@ -43,10 +48,10 @@ class CreditCardResource extends Resource
                     ->required()
                     ->maxLength(50)
                     ->label(__('filament_resources.credit_card.columns.due_day')),
-                Forms\Components\TextInput::make('account_limit')
+                Forms\Components\TextInput::make('credit_card_limit')
                     ->required()
                     ->maxLength(50)
-                    ->label(__('filament_resources.credit_card.columns.limit')),
+                    ->label(__('filament_resources.credit_card.columns.credit_card_limit')),
                 Forms\Components\Toggle::make('direct_debit')
                     ->required()
                     ->label(__('filament_resources.credit_card.columns.direct_debit')),
@@ -78,11 +83,11 @@ class CreditCardResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.credit_card.columns.due_day')),
-                Tables\Columns\TextColumn::make('account_limit')
+                Tables\Columns\TextColumn::make('credit_card_limit')
                     ->money('brl')
                     ->sortable()
                     ->searchable()
-                    ->label(__('filament_resources.credit_card.columns.limit')),
+                    ->label(__('filament_resources.credit_card.columns.credit_card_limit')),
                 Tables\Columns\ToggleColumn::make('direct_debit')
                     ->sortable()
                     ->searchable()

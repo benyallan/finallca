@@ -31,54 +31,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'crdo_88@hotmail.com',
             'password' => 'teste123',
         ]);
-
-        // $this->createDataForUser($users);
-    }
-
-    private function createDataForUser(array|User $user): void
-    {
-        if ($user instanceof User) {
-            $persons = Person::factory(2)->forUser($user)->create();
-
-            foreach ($persons as $person) {
-                $banks = Bank::factory(2)
-                    ->forUser($user)
-                    ->create();
-
-                foreach ($banks as $bank) {
-                    $accounts = Account::factory(2)
-                        ->forPerson($person)
-                        ->forUser($user)
-                        ->fromBank($bank)
-                        ->create();
-                }
-
-                foreach ($accounts as $account) {
-                    AccountTransaction::factory(2)
-                        ->forUser($user)
-                        ->fromAccount($account)
-                        ->create();
-                }
-
-                $creditCards = CreditCard::factory(2)
-                    ->forPerson($person)
-                    ->forUser($user)
-                    ->withoutBank()
-                    ->create();
-
-                foreach ($creditCards as $creditCard) {
-                    CreditCardTransaction::factory(2)
-                        ->forUser($user)
-                        ->fromCreditCard($creditCard)
-                        ->create();
-                }
-            }
-
-            return;
-        }
-
-        foreach ($user as $user) {
-            $this->createDataForUser($user);
-        }
     }
 }
