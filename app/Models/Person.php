@@ -28,9 +28,4 @@ class Person extends Model
     {
         return $this->hasMany(Account::class);
     }
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new UserScope);
-    }
 }

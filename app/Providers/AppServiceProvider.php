@@ -34,8 +34,6 @@ class AppServiceProvider extends ServiceProvider
         Account::observe(AccountObserver::class);
         Bank::observe(BankObserver::class);
         Person::observe(PersonObserver::class);
-        AccountTransaction::observe(AccountTransactionObserver::class);
         CreditCard::observe(CreditCardObserver::class);
-        CreditCardTransaction::observe(CreditCardTransactionObserver::class);
     }
 }

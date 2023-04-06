@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\UserScope;
 use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CreditCard extends Model
@@ -41,13 +41,8 @@ class CreditCard extends Model
         return $this->belongsTo(Person::class);
     }
 
-    public function transactions(): HasMany
+    public function transactions(): MorphMany
     {
-        return $this->hasMany(CreditCardTransaction::class);
-    }
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new UserScope);
+        return $this->morphMany(Transaction::class, 'accountable');
     }
 }
