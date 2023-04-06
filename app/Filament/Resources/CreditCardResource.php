@@ -131,7 +131,8 @@ class CreditCardResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-            ]);
+            ])
+            ->whereBelongsTo(auth()->user());
     }
 
     public static function getModelLabel(): string
