@@ -2,8 +2,8 @@
 
 return [
     'user' => [
-        'user' => 'usuário',
-        'users' => 'usuários',
+        'user' => 'Usuário',
+        'users' => 'Usuários',
         'columns' => [
             'email_verified_at' => 'E-mail verificado em',
             'created_at' => 'Criado em',
@@ -26,8 +26,8 @@ return [
         ],
     ],
     'credit_card' => [
-        'credit_card' => 'cartão de crédito',
-        'credit_cards' => 'cartões de crédito',
+        'credit_card' => 'Cartão de crédito',
+        'credit_cards' => 'Cartões de crédito',
         'columns' => [
             'created_at' => 'Criado em',
             'deleted_at' => 'Excluído em',
@@ -41,8 +41,8 @@ return [
         ],
     ],
     'bank' => [
-        'bank' => 'banco',
-        'banks' => 'bancos',
+        'bank' => 'Banco',
+        'banks' => 'Bancos',
         'columns' => [
             'created_at' => 'Criado em',
             'deleted_at' => 'Excluído em',
@@ -52,8 +52,8 @@ return [
         ],
     ],
     'account' => [
-        'account' => 'conta',
-        'accounts' => 'contas',
+        'account' => 'Conta bancária',
+        'accounts' => 'Contas bancárias',
         'columns' => [
             'created_at' => 'Criado em',
             'deleted_at' => 'Excluído em',
@@ -70,8 +70,8 @@ return [
         ],
     ],
     'transaction' => [
-        'transaction' => 'transação',
-        'transactions' => 'transações',
+        'transaction' => 'Transação',
+        'transactions' => 'Transações',
         'columns' => [
             'created_at' => 'Criado em',
             'deleted_at' => 'Excluído em',

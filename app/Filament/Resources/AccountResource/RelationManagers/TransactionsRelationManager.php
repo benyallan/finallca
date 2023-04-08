@@ -45,7 +45,7 @@ class TransactionsRelationManager extends RelationManager
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
                 Forms\Components\DatePicker::make('due_date')
                     ->label(__('filament_resources.transaction.columns.due_date')),
-                Forms\Components\DateTimePicker::make('completed_at')
+                Forms\Components\DatePicker::make('completed_at')
                     ->label(__('filament_resources.transaction.columns.completed_at')),
                 Forms\Components\Select::make('direction')
                     ->options(Direction::toFilamentSelectOptions())

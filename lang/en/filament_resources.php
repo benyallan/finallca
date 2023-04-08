@@ -2,8 +2,8 @@
 
 return [
     'user' => [
-        'user' => 'user',
-        'users' => 'users',
+        'user' => 'User',
+        'users' => 'Users',
         'columns' => [
             'email_verified_at' => 'Email verified at',
             'created_at' => 'Created at',
@@ -15,8 +15,8 @@ return [
         ],
     ],
     'person' => [
-        'person' => 'person',
-        'people' => 'people',
+        'person' => 'Person',
+        'people' => 'People',
         'columns' => [
             'created_at' => 'Created at',
             'deleted_at' => 'Deleted at',
@@ -26,8 +26,8 @@ return [
         ],
     ],
     'credit_card' => [
-        'credit_card' => 'credit card',
-        'credit_cards' => 'credit cards',
+        'credit_card' => 'Credit card',
+        'credit_cards' => 'Credit cards',
         'columns' => [
             'created_at' => 'Created at',
             'deleted_at' => 'Deleted at',
@@ -41,8 +41,8 @@ return [
         ],
     ],
     'bank' => [
-        'bank' => 'bank',
-        'banks' => 'banks',
+        'bank' => 'Bank',
+        'banks' => 'Banks',
         'columns' => [
             'created_at' => 'Created at',
             'deleted_at' => 'Deleted at',
@@ -52,8 +52,8 @@ return [
         ],
     ],
     'account' => [
-        'account' => 'account',
-        'accounts' => 'accounts',
+        'account' => 'Bank account',
+        'accounts' => 'Bank accounts',
         'columns' => [
             'created_at' => 'Created at',
             'deleted_at' => 'Deleted at',
@@ -69,8 +69,8 @@ return [
         ],
     ],
     'transaction' => [
-        'transaction' => 'transaction',
-        'transactions' => 'transactions',
+        'transaction' => 'Transaction',
+        'transactions' => 'Transactions',
         'columns' => [
             'created_at' => 'Created at',
             'deleted_at' => 'Deleted at',

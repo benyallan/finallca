@@ -5,6 +5,9 @@ namespace App\Filament\Resources\PersonResource\RelationManagers;
 use App\Enums\Account\AccountType;
 use App\Models\Bank;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
@@ -20,44 +23,78 @@ class AccountsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
-                    ->maxLength(36)
-                    ->disabled()
-                    ->hiddenOn('create'),
-                Forms\Components\TextInput::make('description')
-                    ->required()
-                    ->autofocus()
-                    ->label(__('filament_resources.account.columns.description')),
-                Forms\Components\TextInput::make('opening_balance')
-                    ->label(__('filament_resources.account.columns.opening_balance')),
-                Forms\Components\Select::make('bank_id')
+                Select::make('bank_id')
                     ->options(Bank::all()->pluck('name', 'id')->toArray())
                     ->required()
                     ->label(__('filament_resources.bank.bank')),
-                Forms\Components\Select::make('type')
+                Select::make('type')
                     ->options(AccountType::toFilamentSelectOptions())
                     ->required()
                     ->label(__('filament_resources.account.columns.type')),
-                Forms\Components\TextInput::make('number')
-                    ->required()
-                    ->label(__('filament_resources.account.columns.number')),
-                Forms\Components\TextInput::make('account_limit')
+                TextInput::make('id')
+                    ->maxLength(36)
+                    ->disabled()
+                    ->hiddenOn('create'),
+                TextInput::make('opening_balance')
+                    ->visibleOn('create')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
+                    ->label(__('filament_resources.account.columns.opening_balance')),
+                TextInput::make('balance')
+                    ->hiddenOn('create')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
+                    ->disabled()
+                    ->label(__('filament_resources.account.columns.balance')),
+                TextInput::make('account_limit')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->label(__('filament_resources.account.columns.account_limit')),
-                Forms\Components\Toggle::make('income')
-                    ->label(__('filament_resources.account.columns.income')),
-                Forms\Components\TextInput::make('maintenance_fee')
-                    ->label(__('filament_resources.account.columns.maintenance_fee')),
-            ]);
+                TextInput::make('description')
+                    ->label(__('filament_resources.account.columns.description')),
+                ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('description')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.description')),
                 Tables\Columns\TextColumn::make('bank.name')
                     ->sortable()
                     ->searchable()
@@ -66,6 +103,20 @@ class AccountsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.type')),
+                Tables\Columns\TextColumn::make('balance')
+                    ->sortable()
+                    ->searchable()
+                    ->money('BRL', true)
+                    ->label(__('filament_resources.account.columns.balance')),
+                Tables\Columns\TextColumn::make('account_limit')
+                    ->sortable()
+                    ->searchable()
+                    ->money('BRL', true)
+                    ->label(__('filament_resources.account.columns.account_limit')),
+                Tables\Columns\TextColumn::make('description')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.account.columns.description')),
             ])
             ->filters([
                 //

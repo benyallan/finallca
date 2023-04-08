@@ -11,10 +11,7 @@ class AccountObserver
      */
     public function created(Account $account): void
     {
-        $account->opening_balance = $account->opening_balance ?? 0;
         $account->balance = $account->opening_balance;
-        $account->account_limit = $account->account_limit ?? 0;
-        $account->maintenance_fee = $account->maintenance_fee ?? 0;
         $account->user()->associate(auth()->user())->save();
     }
 

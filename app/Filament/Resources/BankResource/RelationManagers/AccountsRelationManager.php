@@ -8,6 +8,7 @@ use App\Models\Person;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TextInput\Mask;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -24,53 +25,96 @@ class AccountsRelationManager extends RelationManager
     {
         return $form
             ->schema([
+                Select::make('type')
+                    ->options(AccountType::toFilamentSelectOptions())
+                    ->required()
+                    ->label(__('filament_resources.account.columns.type')),
                 TextInput::make('id')
                     ->maxLength(36)
                     ->disabled()
                     ->hiddenOn('create'),
-                TextInput::make('description')
-                    ->required()
-                    ->autofocus()
-                    ->label(__('filament_resources.account.columns.description')),
                 TextInput::make('opening_balance')
                     ->visibleOn('create')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->label(__('filament_resources.account.columns.opening_balance')),
                 TextInput::make('balance')
                     ->hiddenOn('create')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->disabled()
                     ->label(__('filament_resources.account.columns.balance')),
                 Select::make('person_id')
                     ->options(Person::all()->pluck('name', 'id')->toArray())
                     ->required()
                     ->label(__('filament_resources.person.person')),
-                Select::make('type')
-                    ->options(AccountType::toFilamentSelectOptions())
-                    ->required()
-                    ->label(__('filament_resources.account.columns.type')),
-                TextInput::make('number')
-                    ->required()
-                    ->label(__('filament_resources.account.columns.number')),
                 TextInput::make('account_limit')
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->label(__('filament_resources.account.columns.account_limit')),
-                    TextInput::make('maintenance_fee')
-                    ->label(__('filament_resources.account.columns.maintenance_fee')),
-                Toggle::make('income')
-                    ->label(__('filament_resources.account.columns.income')),
-            ]);
+                TextInput::make('description')
+                    ->label(__('filament_resources.account.columns.description')),
+                ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('description')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.description')),
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.type')),
+                Tables\Columns\TextColumn::make('balance')
+                    ->sortable()
+                    ->searchable()
+                    ->money('BRL', true)
+                    ->label(__('filament_resources.account.columns.balance')),
+                Tables\Columns\TextColumn::make('account_limit')
+                    ->sortable()
+                    ->searchable()
+                    ->money('BRL', true)
+                    ->label(__('filament_resources.account.columns.account_limit')),
+                Tables\Columns\TextColumn::make('description')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.account.columns.description')),
             ])
             ->filters([
                 //

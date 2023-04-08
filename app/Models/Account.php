@@ -29,17 +29,23 @@ class Account extends Model
         'type',
         'number',
         'account_limit',
-        'income',
-        'maintenance_fee',
     ];
 
     protected $casts = [
-        'opening_balance' => 'double',
-        'balance' => 'double',
-        'account_limit' => 'double',
-        'income' => 'boolean',
-        'maintenance_fee' => 'float',
+        'opening_balance' => 'decimal:2',
+        'balance' => 'decimal:2',
+        'account_limit' => 'decimal:2',
         'type' => AccountType::class,
+    ];
+
+    protected $appends = [
+        'name',
+    ];
+
+    protected $attributes = [
+        'opening_balance' => 0,
+        'balance' => 0,
+        'account_limit' => 0,
     ];
 
     public function bank(): BelongsTo
@@ -55,5 +61,10 @@ class Account extends Model
     public function transactions(): MorphMany
     {
         return $this->morphMany(Transaction::class, 'accountable');
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->bank->name . ' - ' . $this->type->value;
     }
 }

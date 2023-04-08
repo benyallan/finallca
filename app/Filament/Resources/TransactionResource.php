@@ -63,6 +63,7 @@ class TransactionResource extends Resource
                     ->types([
                         MorphToSelect\Type::make(Account::class)
                             ->label(__('filament_resources.account.account'))
+                            ->getOptionLabelFromRecordUsing(fn (Account $record): string => "{$record->name}")
                             ->titleColumnName('description'),
                         MorphToSelect\Type::make(CreditCard::class)
                             ->label(__('filament_resources.credit_card.credit_card'))

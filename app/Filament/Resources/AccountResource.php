@@ -30,14 +30,18 @@ class AccountResource extends Resource
     {
         return $form
             ->schema([
+                Select::make('bank_id')
+                    ->options(Bank::all()->pluck('name', 'id')->toArray())
+                    ->required()
+                    ->label(__('filament_resources.bank.bank')),
+                Select::make('type')
+                    ->options(AccountType::toFilamentSelectOptions())
+                    ->required()
+                    ->label(__('filament_resources.account.columns.type')),
                 TextInput::make('id')
                     ->maxLength(36)
                     ->disabled()
                     ->hiddenOn('create'),
-                TextInput::make('description')
-                    ->required()
-                    ->autofocus()
-                    ->label(__('filament_resources.account.columns.description')),
                 TextInput::make('opening_balance')
                     ->visibleOn('create')
                     ->mask(fn (Mask $mask) => $mask
@@ -73,21 +77,10 @@ class AccountResource extends Resource
                     )
                     ->disabled()
                     ->label(__('filament_resources.account.columns.balance')),
-                Select::make('bank_id')
-                    ->options(Bank::all()->pluck('name', 'id')->toArray())
-                    ->required()
-                    ->label(__('filament_resources.bank.bank')),
                 Select::make('person_id')
                     ->options(Person::all()->pluck('name', 'id')->toArray())
                     ->required()
                     ->label(__('filament_resources.person.person')),
-                Select::make('type')
-                    ->options(AccountType::toFilamentSelectOptions())
-                    ->required()
-                    ->label(__('filament_resources.account.columns.type')),
-                TextInput::make('number')
-                    ->required()
-                    ->label(__('filament_resources.account.columns.number')),
                 TextInput::make('account_limit')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
@@ -104,67 +97,37 @@ class AccountResource extends Resource
                         ->pattern('R$money'),
                     )
                     ->label(__('filament_resources.account.columns.account_limit')),
-                TextInput::make('maintenance_fee')
-                    ->mask(fn (Mask $mask) => $mask
-                        ->patternBlocks([
-                            'money' => fn (Mask $mask) => $mask
-                                ->numeric()
-                                ->decimalPlaces(2)
-                                ->mapToDecimalSeparator(['.'])
-                                ->minValue(1)
-                                ->normalizeZeros()
-                                ->padFractionalZeros()
-                                ->thousandsSeparator('.')
-                                ->decimalSeparator(','),
-                        ])
-                        ->pattern('R$money'),
-                    )
-                    ->label(__('filament_resources.account.columns.maintenance_fee')),
-                Toggle::make('income')
-                    ->label(__('filament_resources.account.columns.income')),
-            ]);
+                TextInput::make('description')
+                    ->label(__('filament_resources.account.columns.description')),
+                ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('description')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.description')),
                 Tables\Columns\TextColumn::make('bank.name')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.bank.bank')),
-                Tables\Columns\TextColumn::make('balance')
-                    ->sortable()
-                    ->searchable()
-                    ->money('brl', true)
-                    ->label(__('filament_resources.account.columns.balance')),
                 Tables\Columns\TextColumn::make('type')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.account.columns.type')),
-                Tables\Columns\TextColumn::make('number')
+                Tables\Columns\TextColumn::make('balance')
                     ->sortable()
                     ->searchable()
-                    ->label(__('filament_resources.account.columns.number')),
+                    ->money('BRL')
+                    ->label(__('filament_resources.account.columns.balance')),
                 Tables\Columns\TextColumn::make('account_limit')
                     ->sortable()
                     ->searchable()
-                    ->money('brl', true)
+                    ->money('BRL')
                     ->label(__('filament_resources.account.columns.account_limit')),
-                Tables\Columns\ToggleColumn::make('income')
-                    ->disabled()
+                Tables\Columns\TextColumn::make('description')
                     ->sortable()
                     ->searchable()
-                    ->label(__('filament_resources.account.columns.income')),
-                Tables\Columns\TextColumn::make('maintenance_fee')
-                    ->sortable()
-                    ->money('brl', true)
-                    ->searchable()
-                    ->label(__('filament_resources.account.columns.maintenance_fee')),
+                    ->label(__('filament_resources.account.columns.description')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
