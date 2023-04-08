@@ -80,7 +80,13 @@ return [
             'transaction_amount' => 'Transaction amount',
             'description' => 'Description',
             'completed_at' => 'Completed at',
-            'direction' => 'Direction',
+            'direction' => [
+                'direction' => 'Operation',
+                'in' => 'Credit',
+                'out' => 'Debit',
+            ],
+            'related_transaction_id' => 'Transfer to',
+            'accountable' => 'Transaction from',
         ],
     ],
 ];

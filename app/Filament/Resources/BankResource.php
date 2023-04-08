@@ -27,10 +27,6 @@ class BankResource extends Resource
                     ->maxLength(36)
                     ->disabled()
                     ->hiddenOn('create'),
-                Forms\Components\TextInput::make('number')
-                    ->required()
-                    ->maxLength(3)
-                    ->label(__('filament_resources.bank.columns.number')),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(50)
@@ -42,11 +38,6 @@ class BankResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->hidden(),
-                Tables\Columns\TextColumn::make('number')
-                    ->searchable()
-                    ->sortable()
-                    ->label(__('filament_resources.bank.columns.number')),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable()

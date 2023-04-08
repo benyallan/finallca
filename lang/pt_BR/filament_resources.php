@@ -86,6 +86,8 @@ return [
                 'in' => 'Crédito',
                 'out' => 'Débito',
             ],
+            'related_transaction_id' => 'Transferência para',
+            'accountable' => 'Transação de: ',
         ],
     ],
 ];

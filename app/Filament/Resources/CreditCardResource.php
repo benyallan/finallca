@@ -100,7 +100,6 @@ class CreditCardResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->hidden(),
                 Tables\Columns\TextColumn::make('brand')
                     ->sortable()
                     ->searchable()

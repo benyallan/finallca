@@ -18,7 +18,6 @@ class Bank extends Model
 
     protected $fillable = [
         'user_id',
-        'number',
         'name',
     ];
 

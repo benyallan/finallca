@@ -23,6 +23,8 @@ class Transaction extends Model
         'description',
         'completed_at',
         'direction',
+        'accountable_type',
+        'accountable_id',
     ];
 
     protected $casts = [
