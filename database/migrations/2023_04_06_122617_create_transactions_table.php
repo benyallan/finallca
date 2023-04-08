@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('currency_code')->default('BRL');
             $table->decimal('transaction_amount', 15, 2);
             $table->string('description');
-            $table->timestamp('completed_at')->nullable();
+            $table->date('completed_at')->nullable();
             $table->string('direction');
             $table->softDeletes();
             $table->timestamps();

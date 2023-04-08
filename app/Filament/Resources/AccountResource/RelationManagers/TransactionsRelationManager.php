@@ -59,15 +59,18 @@ class TransactionsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('description')
+                Tables\Columns\TextColumn::make('direction')
                     ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.transaction.columns.description')),
+                    ->label(__('filament_resources.transaction.columns.direction.direction')),
                 Tables\Columns\TextColumn::make('transaction_amount')
                     ->sortable()
                     ->money('BRL')
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
+                Tables\Columns\TextColumn::make('description')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.transaction.columns.description')),
                 Tables\Columns\TextColumn::make('due_date')
                     ->sortable()
                     ->searchable()
