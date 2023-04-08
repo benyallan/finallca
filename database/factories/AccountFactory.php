@@ -46,7 +46,7 @@ class AccountFactory extends ModelFactory
         });
     }
 
-    public function fromBank(\App\Models\Bank $bank): Factory
+    public function forBank(\App\Models\Bank $bank): Factory
     {
         return $this->state(function (array $attributes) use ($bank) {
             return [

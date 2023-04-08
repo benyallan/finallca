@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->foreignUuid('related_transaction_id')->nullable()->constrained('transactions');
-            $table->morphs('accountable');
+            $table->foreignUuid('related_transaction_id')->nullable();
+            $table->uuidMorphs('accountable');
             $table->date('due_date')->nullable();
             $table->string('currency_code')->default('BRL');
             $table->decimal('transaction_amount', 15, 2);
             $table->string('description');
             $table->timestamp('completed_at')->nullable();
+            $table->string('direction');
             $table->softDeletes();
             $table->timestamps();
         });

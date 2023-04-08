@@ -15,6 +15,7 @@ class Person extends Model
     use HasFactory, SoftDeletes, HasUuids, HasUser;
 
     protected $fillable = [
+        'user_id',
         'name',
         'email',
     ];

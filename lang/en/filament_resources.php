@@ -68,4 +68,19 @@ return [
             'maintenance_fee' => 'Maintenance fee',
         ],
     ],
+    'transaction' => [
+        'transaction' => 'transaction',
+        'transactions' => 'transactions',
+        'columns' => [
+            'created_at' => 'Created at',
+            'deleted_at' => 'Deleted at',
+            'updated_at' => 'Updated at',
+            'due_date' => 'Due date',
+            'currency_code' => 'Currency code',
+            'transaction_amount' => 'Transaction amount',
+            'description' => 'Description',
+            'completed_at' => 'Completed at',
+            'direction' => 'Direction',
+        ],
+    ],
 ];

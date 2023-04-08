@@ -17,6 +17,7 @@ class Bank extends Model
     use HasFactory, HasUuids, SoftDeletes, HasUser;
 
     protected $fillable = [
+        'user_id',
         'number',
         'name',
     ];

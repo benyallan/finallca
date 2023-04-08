@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Enums\Account\AccountType;
 use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers;
+use App\Filament\Resources\AccountResource\RelationManagers\TransactionsRelationManager;
 use App\Models\Account;
 use App\Models\Bank;
 use App\Models\Person;
@@ -183,7 +184,7 @@ class AccountResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TransactionsRelationManager::class,
         ];
     }
 

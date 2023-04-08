@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Transaction\Direction;
 use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,11 +21,14 @@ class Transaction extends Model
         'transaction_amount',
         'description',
         'completed_at',
+        'direction',
     ];
 
     protected $casts = [
         'due_date' => 'date',
         'completed_at' => 'datetime',
+        'transaction_amount' => 'decimal:2',
+        'direction' => Direction::class,
     ];
 
     public function accountable()
