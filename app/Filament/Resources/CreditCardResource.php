@@ -4,9 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CreditCardResource\Pages;
 use App\Filament\Resources\CreditCardResource\RelationManagers;
+use App\Filament\Resources\CreditCardResource\RelationManagers\TransactionsRelationManager;
 use App\Models\CreditCard;
 use App\Models\Person;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -42,14 +44,50 @@ class CreditCardResource extends Resource
                     ->label(__('filament_resources.credit_card.columns.description')),
                 Forms\Components\TextInput::make('closing_day')
                     ->required()
-                    ->maxLength(50)
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'day' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->integer()
+                                ->minValue(1)
+                                ->maxValue(28)
+                                ->normalizeZeros()
+                                ->thousandsSeparator('.')
+                        ])
+                        ->pattern('day'),
+                    )
                     ->label(__('filament_resources.credit_card.columns.closing_day')),
                 Forms\Components\TextInput::make('due_day')
                     ->required()
-                    ->maxLength(50)
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'day' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->integer()
+                                ->minValue(1)
+                                ->maxValue(28)
+                                ->normalizeZeros()
+                                ->thousandsSeparator('.')
+                        ])
+                        ->pattern('day'),
+                    )
                     ->label(__('filament_resources.credit_card.columns.due_day')),
                 Forms\Components\TextInput::make('credit_card_limit')
                     ->required()
+                    ->mask(fn (Mask $mask) => $mask
+                        ->patternBlocks([
+                            'money' => fn (Mask $mask) => $mask
+                                ->numeric()
+                                ->decimalPlaces(2)
+                                ->mapToDecimalSeparator(['.'])
+                                ->minValue(1)
+                                ->normalizeZeros()
+                                ->padFractionalZeros()
+                                ->thousandsSeparator('.')
+                                ->decimalSeparator(','),
+                        ])
+                        ->pattern('R$money'),
+                    )
                     ->maxLength(50)
                     ->label(__('filament_resources.credit_card.columns.credit_card_limit')),
                 Forms\Components\Toggle::make('direct_debit')
@@ -112,7 +150,7 @@ class CreditCardResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TransactionsRelationManager::class,
         ];
     }
 

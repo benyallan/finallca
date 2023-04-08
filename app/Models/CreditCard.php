@@ -17,6 +17,8 @@ class CreditCard extends Model
 
     protected $fillable = [
         'name',
+        'brand',
+        'credit_card_limit',
         'person_id',
         'description',
         'closing_day',
