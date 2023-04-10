@@ -4,19 +4,18 @@ namespace App\Filament\Resources;
 
 use App\Enums\Transaction\Direction;
 use App\Filament\Resources\TransactionResource\Pages;
-use App\Filament\Resources\TransactionResource\RelationManagers;
 use App\Models\Account;
 use App\Models\CreditCard;
 use App\Models\Transaction;
 use Filament\Forms;
+use Filament\Forms\Components\MorphToSelect;
+use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\MorphToSelect;
-use Filament\Forms\Components\TextInput\Mask;
 
 class TransactionResource extends Resource
 {

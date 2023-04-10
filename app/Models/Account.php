@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Account\AccountType;
-use App\Models\Scopes\UserScope;
 use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -65,6 +63,6 @@ class Account extends Model
 
     public function getNameAttribute(): string
     {
-        return $this->bank->name . ' - ' . $this->type->value;
+        return $this->bank->name.' - '.$this->type->value;
     }
 }

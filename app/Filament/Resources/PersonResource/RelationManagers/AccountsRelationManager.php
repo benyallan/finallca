@@ -4,7 +4,6 @@ namespace App\Filament\Resources\PersonResource\RelationManagers;
 
 use App\Enums\Account\AccountType;
 use App\Models\Bank;
-use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TextInput\Mask;
@@ -88,7 +87,7 @@ class AccountsRelationManager extends RelationManager
                     ->label(__('filament_resources.account.columns.account_limit')),
                 TextInput::make('description')
                     ->label(__('filament_resources.account.columns.description')),
-                ]);
+            ]);
     }
 
     public static function table(Table $table): Table

@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CreditCardResource\Pages;
-use App\Filament\Resources\CreditCardResource\RelationManagers;
 use App\Filament\Resources\CreditCardResource\RelationManagers\TransactionsRelationManager;
 use App\Models\CreditCard;
 use App\Models\Person;
@@ -52,7 +51,7 @@ class CreditCardResource extends Resource
                                 ->minValue(1)
                                 ->maxValue(28)
                                 ->normalizeZeros()
-                                ->thousandsSeparator('.')
+                                ->thousandsSeparator('.'),
                         ])
                         ->pattern('day'),
                     )
@@ -67,7 +66,7 @@ class CreditCardResource extends Resource
                                 ->minValue(1)
                                 ->maxValue(28)
                                 ->normalizeZeros()
-                                ->thousandsSeparator('.')
+                                ->thousandsSeparator('.'),
                         ])
                         ->pattern('day'),
                     )

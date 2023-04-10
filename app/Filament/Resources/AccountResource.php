@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Enums\Account\AccountType;
 use App\Filament\Resources\AccountResource\Pages;
-use App\Filament\Resources\AccountResource\RelationManagers;
 use App\Filament\Resources\AccountResource\RelationManagers\TransactionsRelationManager;
 use App\Models\Account;
 use App\Models\Bank;
@@ -12,7 +11,6 @@ use App\Models\Person;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TextInput\Mask;
-use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -99,7 +97,7 @@ class AccountResource extends Resource
                     ->label(__('filament_resources.account.columns.account_limit')),
                 TextInput::make('description')
                     ->label(__('filament_resources.account.columns.description')),
-                ]);
+            ]);
     }
 
     public static function table(Table $table): Table

@@ -24,6 +24,7 @@ class TransactionFactory extends Factory
             CreditCard::class,
             Account::class,
         ]);
+
         return [
             'user_id' => User::factory()->create()->id,
             'accountable_id' => $accountable::factory()->create()->id,
