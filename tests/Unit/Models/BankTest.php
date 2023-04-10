@@ -27,12 +27,10 @@ class BankTest extends TestCase
         $this->actingAs($user);
 
         $bank = Bank::factory()->create([
-            'number' => '100',
             'name' => 'Banco do Brasil',
             'user_id' => $user->id,
         ]);
 
-        $this->assertEquals('100', $bank->number);
         $this->assertEquals('Banco do Brasil', $bank->name);
         $this->assertEquals($user->id, $bank->user_id);
     }

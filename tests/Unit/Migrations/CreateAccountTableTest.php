@@ -17,17 +17,14 @@ class CreateAccountTableTest extends TestCase
     {
         $fields = [
             'id',
-            'bank_id',
             'user_id',
+            'bank_id',
             'person_id',
             'description',
             'opening_balance',
             'balance',
             'type',
-            'number',
             'account_limit',
-            'income',
-            'maintenance_fee',
             'deleted_at',
             'created_at',
             'updated_at',

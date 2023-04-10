@@ -21,7 +21,7 @@ class CreditCardFactory extends ModelFactory
             'description' => $this->faker->sentence,
             'closing_day' => $this->faker->numberBetween(1, 28),
             'due_day' => $this->faker->numberBetween(1, 28),
-            'account_limit' => $this->faker->randomFloat(2, 100, 10000),
+            'credit_card_limit' => $this->faker->randomFloat(2, 100, 10000),
             'user_id' => \App\Models\User::factory(),
             'direct_debit' => $this->faker->boolean,
             'person_id' => \App\Models\Person::factory(),

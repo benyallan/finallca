@@ -37,7 +37,7 @@ class AccountTest extends TestCase
             'person_id' => $person->id,
         ]);
 
-        $this->assertEquals('100', $account->opening_balance);
+        $this->assertEquals('100.00', $account->opening_balance);
         $this->assertEquals('Conta do John', $account->description);
         $this->assertEquals(AccountType::CURRENT_ACCOUNT, $account->type);
         $this->assertEquals($person->id, $account->person_id);

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class CreateCreditCardTransactionsTableTest extends TestCase
+class CreateTransactionsTableTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,13 +18,15 @@ class CreateCreditCardTransactionsTableTest extends TestCase
         $fields = [
             'id',
             'user_id',
-            'credit_card_id',
+            'related_transaction_id',
+            'accountable_id',
+            'accountable_type',
+            'due_date',
+            'currency_code',
+            'transaction_amount',
             'description',
-            'value',
-            'type',
-            'date',
+            'completed_at',
             'direction',
-            'status',
             'deleted_at',
             'created_at',
             'updated_at',
@@ -32,13 +34,13 @@ class CreateCreditCardTransactionsTableTest extends TestCase
 
         Artisan::call('migrate');
 
-        $this->assertTrue(Schema::hasTable('credit_card_transactions'));
+        $this->assertTrue(Schema::hasTable('transactions'));
 
         foreach ($fields as $field) {
-            $this->assertTrue(Schema::hasColumn('credit_card_transactions', $field));
+            $this->assertTrue(Schema::hasColumn('transactions', $field));
         }
 
-        $this->assertTrue(count(Schema::getColumnListing('credit_card_transactions')) === count($fields));
+        $this->assertTrue(count(Schema::getColumnListing('transactions')) === count($fields));
     }
 
     public function testDropCreditCardTransactionTable(): void
@@ -47,6 +49,6 @@ class CreateCreditCardTransactionsTableTest extends TestCase
 
         Artisan::call('migrate:rollback');
 
-        $this->assertFalse(Schema::hasTable('credit_card_transactions'));
+        $this->assertFalse(Schema::hasTable('transactions'));
     }
 }

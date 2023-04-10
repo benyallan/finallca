@@ -15,7 +15,6 @@ class BankFactory extends ModelFactory
     public function definition(): array
     {
         return [
-            'number' => $this->faker->unique()->numberBetween(1, 999),
             'name' => $this->faker->unique()->company,
             'user_id' => \App\Models\User::factory(),
         ];

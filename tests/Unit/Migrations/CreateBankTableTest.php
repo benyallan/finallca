@@ -18,7 +18,6 @@ class CreateBankTableTest extends TestCase
         $fields = [
             'id',
             'user_id',
-            'number',
             'name',
             'deleted_at',
             'created_at',
