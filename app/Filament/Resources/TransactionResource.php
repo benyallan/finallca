@@ -50,8 +50,10 @@ class TransactionResource extends Resource
                     )
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
                 Forms\Components\DatePicker::make('due_date')
-                ->label(__('filament_resources.transaction.columns.due_date')),
+                    ->displayFormat('d/m/Y')
+                    ->label(__('filament_resources.transaction.columns.due_date')),
                 Forms\Components\DatePicker::make('completed_at')
+                    ->displayFormat('d/m/Y')
                     ->label(__('filament_resources.transaction.columns.completed_at')),
                 Forms\Components\Select::make('direction')
                     ->required()
@@ -81,11 +83,6 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('direction')
                     ->sortable()
                     ->label(__('filament_resources.transaction.columns.direction.direction')),
-                Tables\Columns\TextColumn::make('due_date')
-                    ->date()
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.transaction.columns.due_date')),
                 Tables\Columns\TextColumn::make('transaction_amount')
                     ->sortable()
                     ->searchable()
@@ -95,18 +92,63 @@ class TransactionResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.description')),
+                Tables\Columns\TextColumn::make('due_date')
+                    ->date(format: 'd/m/Y')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.transaction.columns.due_date')),
                 Tables\Columns\TextColumn::make('completed_at')
-                    ->date()
+                    ->date(format: 'd/m/Y')
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.completed_at')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
+                Tables\Filters\SelectFilter::make('direction')
+                    ->options(Direction::toFilamentSelectOptions())
+                    ->label(__('filament_resources.transaction.columns.direction.direction')),
+                Tables\Filters\Filter::make('due_date')
+                    ->form([
+                        Forms\Components\DatePicker::make('from')
+                            ->label('Data de vencimento de'),
+                        Forms\Components\DatePicker::make('until')
+                            ->label('Até'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('due_date', '>=', $date),
+                            )
+                            ->when(
+                                $data['until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('due_date', '<=', $date),
+                            );
+                    }),
+                Tables\Filters\Filter::make('completed_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('from')
+                            ->label('Data do pagamento ou recebimento de'),
+                        Forms\Components\DatePicker::make('until')
+                            ->label('Até'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('completed_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('completed_at', '<=', $date),
+                            );
+                    }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

@@ -44,8 +44,10 @@ class TransactionsRelationManager extends RelationManager
                     )
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
                 Forms\Components\DatePicker::make('due_date')
+                    ->displayFormat('d/m/Y')
                     ->label(__('filament_resources.transaction.columns.due_date')),
                 Forms\Components\DatePicker::make('completed_at')
+                    ->displayFormat('d/m/Y')
                     ->label(__('filament_resources.transaction.columns.completed_at')),
                 Forms\Components\Select::make('direction')
                     ->options(Direction::toFilamentSelectOptions())
@@ -74,10 +76,12 @@ class TransactionsRelationManager extends RelationManager
                     ->label(__('filament_resources.transaction.columns.description')),
                 Tables\Columns\TextColumn::make('due_date')
                     ->sortable()
+                    ->date('d/m/Y')
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.due_date')),
                 Tables\Columns\TextColumn::make('completed_at')
                     ->sortable()
+                    ->date('d/m/Y')
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.completed_at')),
             ])

@@ -32,7 +32,7 @@ class CreditCard extends Model
     protected $casts = [
         'closing_day' => 'integer',
         'due_day' => 'integer',
-        'account_limit' => 'float',
+        'account_limit' => 'decimal:2',
         'user_id' => 'string',
         'person_id' => 'string',
         'direct_debit' => 'boolean',

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->integer('closing_day');
             $table->integer('due_day');
-            $table->float('credit_card_limit');
+            $table->decimal('credit_card_limit', 15, 2);
             $table->boolean('direct_debit');
             $table->softDeletes();
             $table->timestamps();
