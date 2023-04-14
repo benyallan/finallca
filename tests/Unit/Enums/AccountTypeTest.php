@@ -40,4 +40,24 @@ class AccountTypeTest extends TestCase
 
         $this->assertEquals($expected, AccountType::getValues());
     }
+
+    public function testAccountTypeFromValue()
+    {
+        $this->assertEquals(AccountType::CURRENT_ACCOUNT, AccountType::fromValue('Conta Corrente'));
+        $this->assertEquals(AccountType::SAVING_ACCOUNT, AccountType::fromValue('Conta Poupança'));
+        $this->assertEquals(AccountType::SALARY_ACCOUNT, AccountType::fromValue('Conta Salário'));
+        $this->assertEquals(AccountType::INVESTMENT_ACCOUNT, AccountType::fromValue('Conta Investimento'));
+    }
+
+    public function testAccountTypeToFilamentSelectOptions()
+    {
+        $expected = [
+            'Conta Corrente' => 'Conta Corrente',
+            'Conta Poupança' => 'Conta Poupança',
+            'Conta Salário' => 'Conta Salário',
+            'Conta Investimento' => 'Conta Investimento',
+        ];
+
+        $this->assertEquals($expected, AccountType::toFilamentSelectOptions());
+    }
 }

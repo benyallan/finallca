@@ -14,21 +14,12 @@ class BankTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        Artisan::call('migrate:fresh --seed');
-    }
-
-    public function testBankHasNameAndNumberAttributes()
+    public function testBankHasCorrectAttributes()
     {
         $user = User::factory()->create();
-        $this->actingAs($user);
 
-        $bank = Bank::factory()->create([
+        $bank = Bank::factory()->forUser($user)->create([
             'name' => 'Banco do Brasil',
-            'user_id' => $user->id,
         ]);
 
         $this->assertEquals('Banco do Brasil', $bank->name);

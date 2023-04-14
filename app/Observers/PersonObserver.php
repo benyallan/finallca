@@ -11,7 +11,9 @@ class PersonObserver
      */
     public function created(Person $person): void
     {
-        $person->user()->associate(auth()->user())->save();
+        if (blank($person->user_id)) {
+            $person->user()->associate(auth()->user())->save();
+        }
     }
 
     /**

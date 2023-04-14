@@ -18,4 +18,18 @@ class PersonFactoryTest extends TestCase
         $this->assertNotEmpty($person->email);
         $this->assertInstanceOf(\App\Models\User::class, $person->user);
     }
+
+    public function testItCanCreateAPersonWithGivenUser()
+    {
+        $user = \App\Models\User::factory()->create();
+
+        $person = \App\Models\Person::factory()
+            ->forUser($user)
+            ->create();
+
+        $this->assertNotNull($person);
+        $this->assertNotEmpty($person->name);
+        $this->assertNotEmpty($person->email);
+        $this->assertEquals($user->id, $person->user->id);
+    }
 }

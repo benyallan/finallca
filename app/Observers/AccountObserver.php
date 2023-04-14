@@ -12,7 +12,9 @@ class AccountObserver
     public function created(Account $account): void
     {
         $account->balance = $account->opening_balance;
-        $account->user()->associate(auth()->user())->save();
+        if (blank($account->user)) {
+            $account->user()->associate(auth()->user())->save();
+        }
     }
 
     /**

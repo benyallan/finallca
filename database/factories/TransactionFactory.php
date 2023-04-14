@@ -6,12 +6,11 @@ use App\Enums\Transaction\Direction;
 use App\Models\Account;
 use App\Models\CreditCard;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
  */
-class TransactionFactory extends Factory
+class TransactionFactory extends ModelFactory
 {
     /**
      * Define the model's default state.
@@ -35,5 +34,63 @@ class TransactionFactory extends Factory
             'completed_at' => $this->faker->date(),
             'direction' => $this->faker->randomElement(Direction::getValues()),
         ];
+    }
+
+    /**
+     * Indicate that the transaction is a credit.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
+     */
+    public function credit(): self
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'direction' => Direction::IN,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the transaction is a debit.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
+     */
+    public function debit(): self
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'direction' => Direction::OUT,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the transaction belongs to an account.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
+    */
+    public function forAccount(Account $account): self
+    {
+        return $this->state(function (array $attributes) use ($account) {
+            return [
+                'accountable_id' => $account->id,
+                'accountable_type' => Account::class,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the transaction belongs to a credit card.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
+     */
+    public function forCreditCard(CreditCard $creditCard): self
+    {
+        return $this->state(function (array $attributes) use ($creditCard) {
+            return [
+                'accountable_id' => $creditCard->id,
+                'accountable_type' => CreditCard::class,
+            ];
+        });
     }
 }

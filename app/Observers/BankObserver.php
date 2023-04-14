@@ -11,7 +11,9 @@ class BankObserver
      */
     public function created(Bank $bank): void
     {
-        $bank->user()->associate(auth()->user())->save();
+        if (blank($bank->user_id)) {
+            $bank->user()->associate(auth()->user())->save();
+        }
     }
 
     /**

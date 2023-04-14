@@ -11,7 +11,9 @@ class CreditCardObserver
      */
     public function created(CreditCard $creditCard): void
     {
-        $creditCard->user()->associate(auth()->user())->save();
+        if (blank($creditCard->user_id)) {
+            $creditCard->user()->associate(auth()->user())->save();
+        }
     }
 
     /**

@@ -33,10 +33,10 @@ enum AccountType: string
     public static function fromValue(string $value): self
     {
         return match ($value) {
-            self::CURRENT_ACCOUNT => self::CURRENT_ACCOUNT,
-            self::SAVING_ACCOUNT => self::SAVING_ACCOUNT,
-            self::SALARY_ACCOUNT => self::SALARY_ACCOUNT,
-            self::INVESTMENT_ACCOUNT => self::INVESTMENT_ACCOUNT,
+            self::CURRENT_ACCOUNT->value => self::CURRENT_ACCOUNT,
+            self::SAVING_ACCOUNT->value => self::SAVING_ACCOUNT,
+            self::SALARY_ACCOUNT->value => self::SALARY_ACCOUNT,
+            self::INVESTMENT_ACCOUNT->value => self::INVESTMENT_ACCOUNT,
             default => throw new \InvalidArgumentException('Invalid value'),
         };
     }

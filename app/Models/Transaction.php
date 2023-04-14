@@ -31,6 +31,8 @@ class Transaction extends Model
         'completed_at' => 'date',
         'transaction_amount' => 'decimal:2',
         'direction' => Direction::class,
+        'accountable_type' => 'string',
+        'accountable_id' => 'string',
     ];
 
     public function accountable()
@@ -43,7 +45,7 @@ class Transaction extends Model
         return $this->belongsTo(Transaction::class, 'related_transaction_id');
     }
 
-    protected function done(): bool
+    public function done(): bool
     {
         return $this->completed_at !== null;
     }

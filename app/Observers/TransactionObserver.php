@@ -11,7 +11,9 @@ class TransactionObserver
      */
     public function created(Transaction $transaction): void
     {
-        $transaction->user()->associate(auth()->user())->save();
+        if (blank($transaction->user_id)) {
+            $transaction->user()->associate(auth()->user())->save();
+        }
     }
 
     /**

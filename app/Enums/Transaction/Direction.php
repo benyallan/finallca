@@ -31,8 +31,8 @@ enum Direction: string
     public static function fromValue(string $value): self
     {
         return match ($value) {
-            self::IN => self::IN,
-            self::OUT => self::OUT,
+            self::IN->value => self::IN,
+            self::OUT->value => self::OUT,
             default => throw new \InvalidArgumentException('Invalid value'),
         };
     }

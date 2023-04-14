@@ -14,22 +14,13 @@ class PersonTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        Artisan::call('migrate:fresh --seed');
-    }
-
     public function testPersonHasCorrectAttributes()
     {
         $user = User::factory()->create();
-        $this->actingAs($user);
 
-        $person = Person::factory()->create([
+        $person = Person::factory()->forUser($user)->create([
             'name' => 'John Doe',
             'email' => 'johndoe@example.com',
-            'user_id' => $user->id,
         ]);
 
         $this->assertEquals('John Doe', $person->name);
