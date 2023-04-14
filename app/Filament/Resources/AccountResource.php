@@ -29,7 +29,7 @@ class AccountResource extends Resource
         return $form
             ->schema([
                 Select::make('bank_id')
-                    ->options(Bank::all()->pluck('name', 'id')->toArray())
+                    ->relationship('bank', 'name')
                     ->required()
                     ->label(__('filament_resources.bank.bank')),
                 Select::make('type')
@@ -42,7 +42,7 @@ class AccountResource extends Resource
                     ->hiddenOn('create'),
                 TextInput::make('opening_balance')
                     ->visibleOn('create')
-                    ->default('0,00')
+                    ->default('0')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
@@ -60,7 +60,7 @@ class AccountResource extends Resource
                     ->label(__('filament_resources.account.columns.opening_balance')),
                 TextInput::make('balance')
                     ->hiddenOn('create')
-                    ->default('0,00')
+                    ->default('0')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
@@ -78,11 +78,11 @@ class AccountResource extends Resource
                     ->disabled()
                     ->label(__('filament_resources.account.columns.balance')),
                 Select::make('person_id')
-                    ->options(Person::all()->pluck('name', 'id')->toArray())
+                    ->relationship('person', 'name')
                     ->required()
                     ->label(__('filament_resources.person.person')),
                 TextInput::make('account_limit')
-                    ->default('0,00')
+                    ->default('0')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask

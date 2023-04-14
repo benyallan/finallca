@@ -73,7 +73,7 @@ class CreditCardResource extends Resource
                     ->label(__('filament_resources.credit_card.columns.due_day')),
                 Forms\Components\TextInput::make('credit_card_limit')
                     ->required()
-                    ->default('1,00')
+                    ->default('1')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
