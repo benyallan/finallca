@@ -42,13 +42,14 @@ class AccountResource extends Resource
                     ->hiddenOn('create'),
                 TextInput::make('opening_balance')
                     ->visibleOn('create')
+                    ->default('0,00')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
                                 ->numeric()
                                 ->decimalPlaces(2)
                                 ->mapToDecimalSeparator(['.'])
-                                ->minValue(1)
+                                ->minValue(0)
                                 ->normalizeZeros()
                                 ->padFractionalZeros()
                                 ->thousandsSeparator('.')
@@ -59,13 +60,14 @@ class AccountResource extends Resource
                     ->label(__('filament_resources.account.columns.opening_balance')),
                 TextInput::make('balance')
                     ->hiddenOn('create')
+                    ->default('0,00')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
                                 ->numeric()
                                 ->decimalPlaces(2)
                                 ->mapToDecimalSeparator(['.'])
-                                ->minValue(1)
+                                ->minValue(0)
                                 ->normalizeZeros()
                                 ->padFractionalZeros()
                                 ->thousandsSeparator('.')
@@ -80,13 +82,14 @@ class AccountResource extends Resource
                     ->required()
                     ->label(__('filament_resources.person.person')),
                 TextInput::make('account_limit')
+                    ->default('0,00')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
                                 ->numeric()
                                 ->decimalPlaces(2)
                                 ->mapToDecimalSeparator(['.'])
-                                ->minValue(1)
+                                ->minValue(0)
                                 ->normalizeZeros()
                                 ->padFractionalZeros()
                                 ->thousandsSeparator('.')

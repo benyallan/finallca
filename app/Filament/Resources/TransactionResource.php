@@ -33,6 +33,7 @@ class TransactionResource extends Resource
                     ->label(__('filament_resources.transaction.columns.description')),
                 Forms\Components\TextInput::make('transaction_amount')
                     ->required()
+                    ->default('1,00')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
