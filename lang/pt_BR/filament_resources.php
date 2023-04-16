@@ -88,6 +88,7 @@ return [
             ],
             'related_transaction_id' => 'Transferência para',
             'accountable' => 'Transação de: ',
+            'done' => 'Concluída',
         ],
     ],
 ];

@@ -80,11 +80,9 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('direction')
-                    ->sortable()
-                    ->label(__('filament_resources.transaction.columns.direction.direction')),
                 Tables\Columns\TextColumn::make('transaction_amount')
                     ->sortable()
+                    ->color(fn (Transaction $record): string => $record->direction === Direction::IN ? 'success' : 'danger')
                     ->searchable()
                     ->money('BRL')
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
@@ -97,11 +95,9 @@ class TransactionResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.due_date')),
-                Tables\Columns\TextColumn::make('completed_at')
-                    ->date(format: 'd/m/Y')
-                    ->sortable()
-                    ->searchable()
-                    ->label(__('filament_resources.transaction.columns.completed_at')),
+                Tables\Columns\TextColumn::make('done')
+                    ->icon(fn (Transaction $record): string => $record->completed_at ? 'heroicon-o-check' : '')
+                    ->label(__('filament_resources.transaction.columns.done')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

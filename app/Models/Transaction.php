@@ -44,9 +44,4 @@ class Transaction extends Model
     {
         return $this->belongsTo(Transaction::class, 'related_transaction_id');
     }
-
-    public function done(): bool
-    {
-        return $this->completed_at !== null;
-    }
 }
