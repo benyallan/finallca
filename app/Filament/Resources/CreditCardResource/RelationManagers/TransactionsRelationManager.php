@@ -40,12 +40,11 @@ class TransactionsRelationManager extends RelationManager
                         ->pattern('R$money'),
                     )
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
-                Forms\Components\DatePicker::make('due_date')
+                Forms\Components\DatePicker::make('date')
                     ->displayFormat('d/m/Y')
-                    ->label(__('filament_resources.transaction.columns.due_date')),
-                Forms\Components\DatePicker::make('completed_at')
-                    ->displayFormat('d/m/Y')
-                    ->label(__('filament_resources.transaction.columns.completed_at')),
+                    ->label(__('filament_resources.transaction.columns.date')),
+                Forms\Components\Toggle::make('done')
+                    ->label(__('filament_resources.transaction.columns.done')),
                 Forms\Components\Select::make('direction')
                     ->options(Direction::toFilamentSelectOptions())
                     ->default(Direction::IN)
@@ -71,16 +70,14 @@ class TransactionsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.description')),
-                Tables\Columns\TextColumn::make('due_date')
+                Tables\Columns\TextColumn::make('date')
                     ->sortable()
                     ->date('d/m/Y')
                     ->searchable()
-                    ->label(__('filament_resources.transaction.columns.due_date')),
-                Tables\Columns\TextColumn::make('completed_at')
+                    ->label(__('filament_resources.transaction.columns.date')),
+                Tables\Columns\ToggleColumn::make('done')
                     ->sortable()
-                    ->date('d/m/Y')
-                    ->searchable()
-                    ->label(__('filament_resources.transaction.columns.completed_at')),
+                    ->label(__('filament_resources.transaction.columns.done')),
             ])
             ->filters([
                 //

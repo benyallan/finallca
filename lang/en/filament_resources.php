@@ -75,11 +75,11 @@ return [
             'created_at' => 'Created at',
             'deleted_at' => 'Deleted at',
             'updated_at' => 'Updated at',
-            'due_date' => 'Due date',
+            'date' => 'Date',
             'currency_code' => 'Currency code',
             'transaction_amount' => 'Transaction amount',
             'description' => 'Description',
-            'completed_at' => 'Completed at',
+            'done' => 'Done',
             'direction' => [
                 'direction' => 'Operation',
                 'in' => 'Credit',

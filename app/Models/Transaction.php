@@ -7,6 +7,7 @@ use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
@@ -16,32 +17,32 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'related_transaction_id',
-        'due_date',
+        'date',
         'currency_code',
         'transaction_amount',
         'description',
-        'completed_at',
+        'done',
         'direction',
         'accountable_type',
         'accountable_id',
     ];
 
     protected $casts = [
-        'due_date' => 'date',
-        'completed_at' => 'date',
+        'date' => 'date',
+        'done' => 'boolean',
         'transaction_amount' => 'decimal:2',
         'direction' => Direction::class,
         'accountable_type' => 'string',
         'accountable_id' => 'string',
     ];
 
-    public function accountable()
+    public function accountable(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function relatedTransaction()
+    public function belongingTo(): MorphTo
     {
-        return $this->belongsTo(Transaction::class, 'related_transaction_id');
+        return $this->morphTo();
     }
 }

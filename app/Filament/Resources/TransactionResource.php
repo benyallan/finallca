@@ -49,12 +49,11 @@ class TransactionResource extends Resource
                         ->pattern('R$money'),
                     )
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
-                Forms\Components\DatePicker::make('due_date')
+                Forms\Components\DatePicker::make('date')
                     ->displayFormat('d/m/Y')
-                    ->label(__('filament_resources.transaction.columns.due_date')),
-                Forms\Components\DatePicker::make('completed_at')
-                    ->displayFormat('d/m/Y')
-                    ->label(__('filament_resources.transaction.columns.completed_at')),
+                    ->label(__('filament_resources.transaction.columns.date')),
+                Forms\Components\Toggle::make('done')
+                    ->label(__('filament_resources.transaction.columns.done')),
                 Forms\Components\Select::make('direction')
                     ->required()
                     ->options(Direction::toFilamentSelectOptions())
@@ -90,13 +89,12 @@ class TransactionResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.description')),
-                Tables\Columns\TextColumn::make('due_date')
+                Tables\Columns\TextColumn::make('date')
                     ->date(format: 'd/m/Y')
                     ->sortable()
                     ->searchable()
-                    ->label(__('filament_resources.transaction.columns.due_date')),
-                Tables\Columns\TextColumn::make('done')
-                    ->icon(fn (Transaction $record): string => $record->completed_at ? 'heroicon-o-check' : '')
+                    ->label(__('filament_resources.transaction.columns.date')),
+                Tables\Columns\ToggleColumn::make('done')
                     ->label(__('filament_resources.transaction.columns.done')),
             ])
             ->filters([

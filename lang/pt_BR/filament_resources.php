@@ -76,11 +76,10 @@ return [
             'created_at' => 'Criado em',
             'deleted_at' => 'Excluído em',
             'updated_at' => 'Última atualização',
-            'due_date' => 'Data de vencimento',
+            'date' => 'Data',
             'currency_code' => 'Código da moeda',
             'transaction_amount' => 'Valor da transação',
             'description' => 'Descrição',
-            'completed_at' => 'Concluído em',
             'direction' => [
                 'direction' => 'Operação',
                 'in' => 'Crédito',

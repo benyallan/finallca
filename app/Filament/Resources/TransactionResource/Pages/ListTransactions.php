@@ -12,6 +12,7 @@ use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TextInput\Mask;
+use Filament\Forms\Components\Toggle;
 use Filament\Pages\Actions;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
@@ -58,12 +59,11 @@ class ListTransactions extends ListRecords
                         ->pattern('R$money'),
                     )
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
-                DatePicker::make('due_date')
+                DatePicker::make('date')
                     ->displayFormat('d/m/Y')
-                    ->label(__('filament_resources.transaction.columns.due_date')),
-                DatePicker::make('completed_at')
-                    ->displayFormat('d/m/Y')
-                    ->label(__('filament_resources.transaction.columns.completed_at')),
+                    ->label(__('filament_resources.transaction.columns.date')),
+                Toggle::make('done')
+                    ->label(__('filament_resources.transaction.columns.done')),
                 Select::make('from_type_accountable')
                     ->options(AccountableType::getOptionClasses())
                     ->reactive()
@@ -107,9 +107,8 @@ class ListTransactions extends ListRecords
             'direction' => Direction::OUT->value,
             'transaction_amount' => $transferData['transaction_amount'],
             'description' => $transferData['description'],
-            'due_date' => $transferData['due_date'],
-            'completed_at' => $transferData['completed_at'],
-            'related_transaction_id' => $transferData['to_accountable'],
+            'date' => $transferData['date'],
+            'done' => $transferData['done'],
         ];
     }
 
@@ -121,9 +120,8 @@ class ListTransactions extends ListRecords
             'direction' => Direction::IN->value,
             'transaction_amount' => $transferData['transaction_amount'],
             'description' => $transferData['description'],
-            'due_date' => $transferData['due_date'],
-            'completed_at' => $transferData['completed_at'],
-            'related_transaction_id' => $transferData['from_accountable'],
+            'date' => $transferData['date'],
+            'done' => $transferData['done'],
         ];
     }
 }
