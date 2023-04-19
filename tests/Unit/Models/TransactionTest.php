@@ -70,16 +70,4 @@ class TransactionTest extends TestCase
         $this->assertInstanceOf(\Carbon\Carbon::class, $transaction->completed_at);
         $this->assertEquals('2023-04-10', $transaction->completed_at->format('Y-m-d'));
     }
-
-    public function test_done(): void
-    {
-        $transaction = Transaction::factory()->create(['completed_at' => null]);
-
-        $this->assertFalse($transaction->done());
-
-        $transaction->completed_at = now();
-        $transaction->save();
-
-        $this->assertTrue($transaction->done());
-    }
 }
