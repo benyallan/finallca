@@ -50,6 +50,7 @@ enum AccountableType: string
             self::ACCOUNT->value => Account::class,
             self::CREDIT_CARD->value => CreditCard::class,
         ];
+
         return array_combine($classes, self::getValues());
     }
 

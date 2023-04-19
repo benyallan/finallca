@@ -24,7 +24,7 @@ class CreditCardFactoryTest extends TestCase
         $this->verifyAsserts($creditCard, ['user' => $user]);
     }
 
-    private function verifyAsserts(\App\Models\CreditCard $creditCard, array $data = []): void
+    private function verifyAsserts(App\Models\CreditCard $creditCard, array $data = []): void
     {
         $this->assertNotNull($creditCard);
         $this->assertNotEmpty($creditCard->description);

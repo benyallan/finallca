@@ -6,8 +6,6 @@ use App\Enums\Account\AccountType;
 use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers\TransactionsRelationManager;
 use App\Models\Account;
-use App\Models\Bank;
-use App\Models\Person;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TextInput\Mask;

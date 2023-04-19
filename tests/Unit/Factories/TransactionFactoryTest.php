@@ -12,7 +12,6 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
-use Database\Factories\TransactionFactory as TransactionFactoryAlias;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
@@ -69,7 +68,7 @@ class TransactionFactoryTest extends TestCase
         $this->verifyAsserts($transaction, ['credit_card' => $creditCard]);
     }
 
-    private function verifyAsserts(\App\Models\Transaction $transaction, array $data = []): void
+    private function verifyAsserts(Transaction $transaction, array $data = []): void
     {
         $this->assertNotNull($transaction);
         $this->assertNotEmpty($transaction->description);

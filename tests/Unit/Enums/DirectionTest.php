@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use PHPUnit\Framework\TestCase;
 use App\Enums\Transaction\Direction;
+use PHPUnit\Framework\TestCase;
 
 final class DirectionTest extends TestCase
 {

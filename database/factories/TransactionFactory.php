@@ -68,7 +68,7 @@ class TransactionFactory extends ModelFactory
      * Indicate that the transaction belongs to an account.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
-    */
+     */
     public function forAccount(Account $account): self
     {
         return $this->state(function (array $attributes) use ($account) {

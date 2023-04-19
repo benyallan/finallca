@@ -7,7 +7,6 @@ namespace Tests\Unit\Models;
 use App\Models\Person;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class PersonTest extends TestCase
