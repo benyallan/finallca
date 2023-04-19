@@ -110,6 +110,7 @@ class ListTransactions extends ListRecords
             'description' => $transferData['description'],
             'due_date' => $transferData['due_date'],
             'completed_at' => $transferData['completed_at'],
+            'related_transaction_id' => $transferData['to_accountable'],
         ];
     }
 
@@ -123,6 +124,7 @@ class ListTransactions extends ListRecords
             'description' => $transferData['description'],
             'due_date' => $transferData['due_date'],
             'completed_at' => $transferData['completed_at'],
+            'related_transaction_id' => $transferData['from_accountable'],
         ];
     }
 }
