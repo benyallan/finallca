@@ -18,21 +18,20 @@ class CreateTransactionsTableTest extends TestCase
         $fields = [
             'id',
             'user_id',
-            'related_transaction_id',
-            'accountable_id',
+            'belonging_to_type',
+            'belonging_to_id',
             'accountable_type',
-            'due_date',
+            'accountable_id',
+            'date',
             'currency_code',
             'transaction_amount',
             'description',
-            'completed_at',
+            'done',
             'direction',
             'deleted_at',
             'created_at',
             'updated_at',
         ];
-
-        Artisan::call('migrate');
 
         $this->assertTrue(Schema::hasTable('transactions'));
 

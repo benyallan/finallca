@@ -73,8 +73,7 @@ class TransactionFactoryTest extends TestCase
         $this->assertNotNull($transaction);
         $this->assertNotEmpty($transaction->description);
         $this->assertNotEmpty($transaction->transaction_amount);
-        $this->assertNotEmpty($transaction->due_date);
-        $this->assertNotEmpty($transaction->completed_at);
+        $this->assertNotEmpty($transaction->date);
         $this->assertNotEmpty($transaction->direction);
         $this->assertTrue(Str::isUuid($transaction['user_id']));
         $this->assertTrue(Str::isUuid($transaction['accountable_id']));

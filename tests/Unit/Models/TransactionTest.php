@@ -38,24 +38,13 @@ class TransactionTest extends TestCase
         $this->assertNotNull($transaction->accountable);
     }
 
-    public function test_belongs_to_related_transaction(): void
-    {
-        $relatedTransaction = Transaction::factory()->create();
-        $transaction = Transaction::factory()->create([
-            'related_transaction_id' => $relatedTransaction->id,
-        ]);
-
-        $this->assertInstanceOf(Transaction::class, $transaction->relatedTransaction);
-        $this->assertEquals($relatedTransaction->id, $transaction->relatedTransaction->id);
-    }
-
     public function test_casts(): void
     {
         $transaction = Transaction::factory()->create([
             'transaction_amount' => '50.00',
             'direction' => Direction::IN,
-            'due_date' => '2023-05-01',
-            'completed_at' => '2023-04-10',
+            'date' => '2023-05-01',
+            'done' => true,
         ]);
 
         $this->assertIsNumeric($transaction->transaction_amount);
@@ -64,10 +53,9 @@ class TransactionTest extends TestCase
         $this->assertInstanceOf(Direction::class, $transaction->direction);
         $this->assertEquals(Direction::IN, $transaction->direction);
 
-        $this->assertInstanceOf(\Carbon\Carbon::class, $transaction->due_date);
-        $this->assertEquals('2023-05-01', $transaction->due_date->format('Y-m-d'));
+        $this->assertInstanceOf(\Carbon\Carbon::class, $transaction->date);
+        $this->assertEquals('2023-05-01', $transaction->date->format('Y-m-d'));
 
-        $this->assertInstanceOf(\Carbon\Carbon::class, $transaction->completed_at);
-        $this->assertEquals('2023-04-10', $transaction->completed_at->format('Y-m-d'));
+        $this->assertTrue($transaction->done);
     }
 }
