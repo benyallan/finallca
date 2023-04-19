@@ -87,8 +87,13 @@ return [
                 'out' => 'Débito',
             ],
             'related_transaction_id' => 'Transferência para',
-            'accountable' => 'Transação de: ',
+            'accountable' => 'Local',
+            'accountable_from' => 'Transação de: ',
+            'accountable_to' => 'Transação para: ',
             'done' => 'Concluída',
+        ],
+        'actions' => [
+            'transfer' => 'Transferência',
         ],
     ],
 ];

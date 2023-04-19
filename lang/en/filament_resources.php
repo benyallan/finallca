@@ -86,8 +86,13 @@ return [
                 'out' => 'Debit',
             ],
             'related_transaction_id' => 'Transfer to',
-            'accountable' => 'Transaction from',
+            'accountable' => 'locale',
+            'accountable_from' => 'Transaction from',
+            'accountable_to' => 'Transaction to',
             'done' => 'Done',
+        ],
+        'actions' => [
+            'transfer' => 'Transfer',
         ],
     ],
 ];
