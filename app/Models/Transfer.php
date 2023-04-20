@@ -22,11 +22,11 @@ class Transfer extends Model
 
     public function sender(): MorphOne
     {
-        return $this->morphOne(Transaction::class, 'sender_id');
+        return $this->morphOne(Transaction::class, 'belonging_to');
     }
 
     public function destination(): MorphOne
     {
-        return $this->morphOne(Transaction::class, 'destination_id');
+        return $this->morphOne(Transaction::class, 'belonging_to');
     }
 }

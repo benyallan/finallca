@@ -25,6 +25,8 @@ class CreditCard extends Model
         'user_id',
         'bank_id',
         'direct_debit',
+        'accountable_type',
+        'accountable_id',
     ];
 
     protected $casts = [
@@ -34,6 +36,8 @@ class CreditCard extends Model
         'user_id' => 'string',
         'person_id' => 'string',
         'direct_debit' => 'boolean',
+        'accountable_type' => 'string',
+        'accountable_id' => 'string',
     ];
 
     public function person(): BelongsTo

@@ -16,7 +16,6 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
-        'related_transaction_id',
         'date',
         'currency_code',
         'transaction_amount',
@@ -25,6 +24,8 @@ class Transaction extends Model
         'direction',
         'accountable_type',
         'accountable_id',
+        'belonging_to_type',
+        'belonging_to_id',
     ];
 
     protected $casts = [
@@ -34,6 +35,8 @@ class Transaction extends Model
         'direction' => Direction::class,
         'accountable_type' => 'string',
         'accountable_id' => 'string',
+        'belonging_to_type' => 'string',
+        'belonging_to_id' => 'string',
     ];
 
     public function accountable(): MorphTo

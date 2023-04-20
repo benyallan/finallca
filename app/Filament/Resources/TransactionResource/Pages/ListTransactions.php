@@ -7,6 +7,8 @@ use App\Enums\Transaction\Direction;
 use App\Filament\Resources\TransactionResource;
 use App\Models\Account;
 use App\Models\CreditCard;
+use App\Models\Transaction;
+use App\Models\Transfer;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -25,15 +27,33 @@ class ListTransactions extends ListRecords
         return [
             Actions\CreateAction::make('createTransfer'),
             Action::make('transfer')->action(function (array $data): void {
-                $accountables[] = $this->fromAccountable($data);
-                $accountables[] = $this->toAccountable($data);
+                $transactionFrom = Transaction::create($this->fromAccountable($data));
+                $transactionTo = Transaction::create($this->toAccountable($data));
+                $transfer = new Transfer();
 
-                foreach ($accountables as $accountable) {
-                    match ($accountable['accountable_type']) {
-                        AccountableType::getOptionClass(AccountableType::ACCOUNT->value) => Account::find($accountable['accountable_id'])->transactions()->create($accountable),
-                        AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value) => CreditCard::find($accountable['accountable_id'])->transactions()->create($accountable),
-                    };
-                }
+                match ($transactionFrom->accountable_type) {
+                    AccountableType::getOptionClass(AccountableType::ACCOUNT->value)
+                        => Account::find($transactionFrom->accountable_id)
+                            ->transactions()
+                            ->save($transactionFrom),
+                    AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value)
+                        => CreditCard::find($transactionFrom->accountable_id)
+                            ->transactions()
+                            ->save($transactionFrom),
+                };
+                $transfer->sender()->save($transactionFrom);
+
+                match ($transactionTo->accountable_type) {
+                    AccountableType::getOptionClass(AccountableType::ACCOUNT->value)
+                        => Account::find($transactionTo->accountable_id)
+                            ->transactions()
+                            ->save($transactionTo),
+                    AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value)
+                        => CreditCard::find($transactionTo->accountable_id)
+                            ->transactions()
+                            ->save($transactionTo),
+                };
+                $transfer->destination()->save($transactionTo);
             })
             ->form([
                 TextInput::make('description')
@@ -62,6 +82,7 @@ class ListTransactions extends ListRecords
                     ->label(__('filament_resources.transaction.columns.date')),
                 Toggle::make('done')
                     ->label(__('filament_resources.transaction.columns.done')),
+                    
                 Select::make('from_type_accountable')
                     ->options(AccountableType::getOptionClasses())
                     ->reactive()
@@ -77,6 +98,7 @@ class ListTransactions extends ListRecords
                     })
                     ->required()
                     ->label(__('')),
+
                 Select::make('to_type_accountable')
                     ->options(AccountableType::getOptionClasses())
                     ->reactive()
@@ -84,7 +106,7 @@ class ListTransactions extends ListRecords
                     ->label(__('filament_resources.transaction.columns.accountable_to')),
                 Select::make('to_accountable')
                     ->options(function (callable $get) {
-                        return match ($get('from_type_accountable')) {
+                        return match ($get('to_type_accountable')) {
                             AccountableType::getOptionClass(AccountableType::ACCOUNT->value) => Account::all()->pluck('name', 'id')->toArray(),
                             AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value) => CreditCard::all()->pluck('description', 'id')->toArray(),
                             default => [],
