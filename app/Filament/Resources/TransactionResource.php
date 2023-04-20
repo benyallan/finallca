@@ -33,7 +33,6 @@ class TransactionResource extends Resource
                     ->label(__('filament_resources.transaction.columns.description')),
                 Forms\Components\TextInput::make('transaction_amount')
                     ->required()
-                    ->default('1,00')
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
@@ -102,10 +101,16 @@ class TransactionResource extends Resource
                 Tables\Filters\SelectFilter::make('direction')
                     ->options(Direction::toFilamentSelectOptions())
                     ->label(__('filament_resources.transaction.columns.direction.direction')),
-                Tables\Filters\Filter::make('due_date')
+                Tables\Filters\SelectFilter::make('done')
+                    ->options([
+                        true => __('filament_resources.transaction.done.yes'),
+                        false => __('filament_resources.transaction.done.no'),
+                    ])
+                    ->label(__('filament_resources.transaction.columns.done')),
+                Tables\Filters\Filter::make('date')
                     ->form([
                         Forms\Components\DatePicker::make('from')
-                            ->label('Data de vencimento de'),
+                            ->label('Data inicial'),
                         Forms\Components\DatePicker::make('until')
                             ->label('Até'),
                     ])
@@ -113,29 +118,11 @@ class TransactionResource extends Resource
                         return $query
                             ->when(
                                 $data['from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('due_date', '>=', $date),
+                                fn (Builder $query, $date): Builder => $query->whereDate('date', '>=', $date),
                             )
                             ->when(
                                 $data['until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('due_date', '<=', $date),
-                            );
-                    }),
-                Tables\Filters\Filter::make('completed_at')
-                    ->form([
-                        Forms\Components\DatePicker::make('from')
-                            ->label('Data do pagamento ou recebimento de'),
-                        Forms\Components\DatePicker::make('until')
-                            ->label('Até'),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('completed_at', '>=', $date),
-                            )
-                            ->when(
-                                $data['until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('completed_at', '<=', $date),
+                                fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                             );
                     }),
             ])

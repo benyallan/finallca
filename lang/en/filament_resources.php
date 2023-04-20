@@ -94,5 +94,9 @@ return [
         'actions' => [
             'transfer' => 'Transfer',
         ],
+        'done' => [
+            'yes' => 'Yes',
+            'no' => 'No',
+        ],
     ],
 ];
