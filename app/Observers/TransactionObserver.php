@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Enums\Transaction\Direction;
 use App\Models\Transaction;
 
 class TransactionObserver
@@ -11,6 +12,11 @@ class TransactionObserver
      */
     public function created(Transaction $transaction): void
     {
+        if ($transaction->direction === Direction::OUT) {
+            $transaction->transaction_amount *= -1;
+            $transaction->save();
+        }
+
         if (blank($transaction->user_id)) {
             $transaction->user()->associate(auth()->user())->save();
         }
@@ -21,7 +27,10 @@ class TransactionObserver
      */
     public function updated(Transaction $transaction): void
     {
-        //
+        if ($transaction->direction === Direction::OUT && $transaction->transaction_amount > 0) {
+            $transaction->transaction_amount *= -1;
+            $transaction->save();
+        }
     }
 
     /**

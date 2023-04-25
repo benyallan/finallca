@@ -5,6 +5,7 @@ namespace App\Filament\Resources\TransactionResource\Pages;
 use App\Enums\Transaction\AccountableType;
 use App\Enums\Transaction\Direction;
 use App\Filament\Resources\TransactionResource;
+use App\Filament\Resources\TransactionResource\Widgets\TransactionAmount;
 use App\Models\Account;
 use App\Models\CreditCard;
 use App\Models\Transaction;
@@ -24,6 +25,8 @@ class ListTransactions extends ListRecords
 
     protected function getActions(): array
     {
+        $this->emit('updateWidget', $this->getFilteredTableQuery()->sum('transaction_amount'));
+
         return [
             Actions\CreateAction::make('createTransfer'),
             Action::make('transfer')->action(function (array $data): void {
@@ -32,24 +35,20 @@ class ListTransactions extends ListRecords
                 $transfer = new Transfer();
 
                 match ($transactionFrom->accountable_type) {
-                    AccountableType::getOptionClass(AccountableType::ACCOUNT->value)
-                        => Account::find($transactionFrom->accountable_id)
+                    AccountableType::getOptionClass(AccountableType::ACCOUNT->value) => Account::find($transactionFrom->accountable_id)
                             ->transactions()
                             ->save($transactionFrom),
-                    AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value)
-                        => CreditCard::find($transactionFrom->accountable_id)
+                    AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value) => CreditCard::find($transactionFrom->accountable_id)
                             ->transactions()
                             ->save($transactionFrom),
                 };
                 $transfer->sender()->save($transactionFrom);
 
                 match ($transactionTo->accountable_type) {
-                    AccountableType::getOptionClass(AccountableType::ACCOUNT->value)
-                        => Account::find($transactionTo->accountable_id)
+                    AccountableType::getOptionClass(AccountableType::ACCOUNT->value) => Account::find($transactionTo->accountable_id)
                             ->transactions()
                             ->save($transactionTo),
-                    AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value)
-                        => CreditCard::find($transactionTo->accountable_id)
+                    AccountableType::getOptionClass(AccountableType::CREDIT_CARD->value) => CreditCard::find($transactionTo->accountable_id)
                             ->transactions()
                             ->save($transactionTo),
                 };
@@ -82,7 +81,7 @@ class ListTransactions extends ListRecords
                     ->label(__('filament_resources.transaction.columns.date')),
                 Toggle::make('done')
                     ->label(__('filament_resources.transaction.columns.done')),
-                    
+
                 Select::make('from_type_accountable')
                     ->options(AccountableType::getOptionClasses())
                     ->reactive()
@@ -119,7 +118,7 @@ class ListTransactions extends ListRecords
         ];
     }
 
-    public function fromAccountable(array $transferData): array
+    protected function fromAccountable(array $transferData): array
     {
         return [
             'accountable_id' => $transferData['from_accountable'],
@@ -132,7 +131,7 @@ class ListTransactions extends ListRecords
         ];
     }
 
-    public function toAccountable(array $transferData): array
+    protected function toAccountable(array $transferData): array
     {
         return [
             'accountable_id' => $transferData['to_accountable'],
@@ -143,5 +142,17 @@ class ListTransactions extends ListRecords
             'date' => $transferData['date'],
             'done' => $transferData['done'],
         ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            TransactionAmount::class,
+        ];
+    }
+
+    public function updated($name, $value)
+    {
+        $this->emit('updateWidget', $this->getFilteredTableQuery()->sum('transaction_amount'));
     }
 }

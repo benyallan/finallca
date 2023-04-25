@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CreditCard extends Model
+class CreditCard extends Accountable
 {
-    use HasFactory, HasUuids, SoftDeletes, HasUser;
+    use HasFactory;
 
     protected $fillable = [
         'brand',
@@ -40,13 +40,17 @@ class CreditCard extends Model
         'accountable_id' => 'string',
     ];
 
+    protected $appends = [
+        'label',
+    ];
+
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
     }
 
-    public function transactions(): MorphMany
+    public function getLabelAttribute(): string
     {
-        return $this->morphMany(Transaction::class, 'accountable');
+        return $this->description;
     }
 }

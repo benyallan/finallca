@@ -44,7 +44,7 @@ class AccountTest extends TestCase
         $this->assertInstanceOf(Bank::class, $account->bank);
         $this->assertInstanceOf(Person::class, $account->person);
         $this->assertInstanceOf(MorphMany::class, $account->transactions());
-        $this->assertEquals($account->bank->name.' - '.$account->type->value, $account->name);
+        $this->assertEquals($account->bank->name.' - '.$account->type->value, $account->label());
     }
 
     public function testAccountCastedAttributes(): void

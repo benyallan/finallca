@@ -31,7 +31,6 @@ class Transaction extends Model
     protected $casts = [
         'date' => 'date',
         'done' => 'boolean',
-        'transaction_amount' => 'decimal:2',
         'direction' => Direction::class,
         'accountable_type' => 'string',
         'accountable_id' => 'string',

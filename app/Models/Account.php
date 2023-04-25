@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Account extends Model
+class Account extends Accountable
 {
-    use HasFactory, HasUuids, SoftDeletes, HasUser;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
@@ -37,7 +37,7 @@ class Account extends Model
     ];
 
     protected $appends = [
-        'name',
+        'label',
     ];
 
     protected $attributes = [
@@ -56,12 +56,7 @@ class Account extends Model
         return $this->belongsTo(Person::class);
     }
 
-    public function transactions(): MorphMany
-    {
-        return $this->morphMany(Transaction::class, 'accountable');
-    }
-
-    public function getNameAttribute(): string
+    public function getLabelAttribute(): string
     {
         return $this->bank->name.' - '.$this->type->value;
     }

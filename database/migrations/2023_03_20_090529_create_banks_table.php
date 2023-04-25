@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('banks', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->string('name', 50)->unique();
+            $table->string('name', 50);
             $table->softDeletes();
             $table->timestamps();
         });

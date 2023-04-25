@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\Transaction\Direction;
 use App\Filament\Resources\TransactionResource\Pages;
+use App\Filament\Resources\TransactionResource\Widgets\TransactionAmount;
 use App\Models\Account;
 use App\Models\CreditCard;
 use App\Models\Transaction;
@@ -33,13 +34,13 @@ class TransactionResource extends Resource
                     ->label(__('filament_resources.transaction.columns.description')),
                 Forms\Components\TextInput::make('transaction_amount')
                     ->required()
+                    ->notIn([0])
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
                                 ->numeric()
                                 ->decimalPlaces(2)
                                 ->mapToDecimalSeparator(['.'])
-                                ->minValue(1)
                                 ->normalizeZeros()
                                 ->padFractionalZeros()
                                 ->thousandsSeparator('.')
@@ -63,7 +64,7 @@ class TransactionResource extends Resource
                     ->types([
                         MorphToSelect\Type::make(Account::class)
                             ->label(__('filament_resources.account.account'))
-                            ->getOptionLabelFromRecordUsing(fn (Account $record): string => "{$record->name}")
+                            ->getOptionLabelFromRecordUsing(fn (Account $record): string => "{$record->label}")
                             ->titleColumnName('description'),
                         MorphToSelect\Type::make(CreditCard::class)
                             ->label(__('filament_resources.credit_card.credit_card'))
@@ -88,6 +89,10 @@ class TransactionResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.description')),
+                Tables\Columns\TextColumn::make('accountable.label')
+                    ->sortable()
+                    ->searchable()
+                    ->label(__('filament_resources.transaction.columns.accountable')),
                 Tables\Columns\TextColumn::make('date')
                     ->date(format: 'd/m/Y')
                     ->sortable()
@@ -172,5 +177,12 @@ class TransactionResource extends Resource
     public static function getPluralLabel(): ?string
     {
         return __('filament_resources.transaction.transactions');
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            TransactionAmount::class,
+        ];
     }
 }
