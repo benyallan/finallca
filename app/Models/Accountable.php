@@ -21,4 +21,3 @@ abstract class Accountable extends Model
 
     abstract public function getLabelAttribute(): string;
 }
-

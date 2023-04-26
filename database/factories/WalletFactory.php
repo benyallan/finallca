@@ -29,8 +29,6 @@ class WalletFactory extends ModelFactory
 
     /**
      * Indicate that the wallet is a personal wallet.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     public function personal(Person $person): Factory
     {
