@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\AccountResource\RelationManagers;
 
 use App\Enums\Transaction\Direction;
+use App\Models\Transaction;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput\Mask;
 use Filament\Resources\Form;
@@ -58,11 +59,9 @@ class TransactionsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('direction')
-                    ->sortable()
-                    ->label(__('filament_resources.transaction.columns.direction.direction')),
                 Tables\Columns\TextColumn::make('transaction_amount')
                     ->sortable()
+                    ->color(fn (Transaction $record): string => $record->direction === Direction::IN ? 'success' : 'danger')
                     ->money('BRL')
                     ->searchable()
                     ->label(__('filament_resources.transaction.columns.transaction_amount')),
