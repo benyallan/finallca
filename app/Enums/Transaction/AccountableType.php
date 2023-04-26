@@ -6,11 +6,13 @@ namespace App\Enums\Transaction;
 
 use App\Models\Account;
 use App\Models\CreditCard;
+use App\Models\Wallet;
 
 enum AccountableType: string
 {
     case ACCOUNT = 'Conta Bancária';
     case CREDIT_CARD = 'Cartão de Crédito';
+    case WALLET = 'Carteira';
 
     public static function toArray(): array
     {
@@ -36,6 +38,7 @@ enum AccountableType: string
         return match ($value) {
             self::ACCOUNT->value => self::ACCOUNT,
             self::CREDIT_CARD->value => self::CREDIT_CARD,
+            self::WALLET->value => self::WALLET,
             default => throw new \InvalidArgumentException('Invalid value'),
         };
     }
@@ -50,6 +53,7 @@ enum AccountableType: string
         $classes = [
             self::ACCOUNT->value => Account::class,
             self::CREDIT_CARD->value => CreditCard::class,
+            self::WALLET->value => Wallet::class,
         ];
 
         return array_combine($classes, self::getValues());
@@ -60,6 +64,7 @@ enum AccountableType: string
         return match ($value) {
             self::ACCOUNT->value => Account::class,
             self::CREDIT_CARD->value => CreditCard::class,
+            self::WALLET->value => Wallet::class,
             default => throw new \InvalidArgumentException('Invalid value'),
         };
     }

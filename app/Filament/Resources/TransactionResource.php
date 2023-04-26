@@ -8,6 +8,7 @@ use App\Filament\Resources\TransactionResource\Widgets\TransactionAmount;
 use App\Models\Account;
 use App\Models\CreditCard;
 use App\Models\Transaction;
+use App\Models\Wallet;
 use Filament\Forms;
 use Filament\Forms\Components\MorphToSelect;
 use Filament\Forms\Components\TextInput\Mask;
@@ -22,7 +23,7 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-arrow-right';
+    protected static ?string $navigationIcon = 'heroicon-o-switch-horizontal';
 
     public static function form(Form $form): Form
     {
@@ -68,6 +69,9 @@ class TransactionResource extends Resource
                             ->titleColumnName('description'),
                         MorphToSelect\Type::make(CreditCard::class)
                             ->label(__('filament_resources.credit_card.credit_card'))
+                            ->titleColumnName('description'),
+                        MorphToSelect\Type::make(Wallet::class)
+                            ->label(__('filament_resources.wallet.wallet'))
                             ->titleColumnName('description'),
                     ])
                     ->required()

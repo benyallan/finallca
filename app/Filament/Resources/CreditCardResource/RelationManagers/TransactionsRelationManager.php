@@ -25,13 +25,13 @@ class TransactionsRelationManager extends RelationManager
                     ->label(__('filament_resources.transaction.columns.description')),
                 Forms\Components\TextInput::make('transaction_amount')
                     ->required()
+                    ->notIn([0])
                     ->mask(fn (Mask $mask) => $mask
                         ->patternBlocks([
                             'money' => fn (Mask $mask) => $mask
                                 ->numeric()
                                 ->decimalPlaces(2)
                                 ->mapToDecimalSeparator(['.'])
-                                ->minValue(1)
                                 ->normalizeZeros()
                                 ->padFractionalZeros()
                                 ->thousandsSeparator('.')

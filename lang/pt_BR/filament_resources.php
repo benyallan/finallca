@@ -100,4 +100,17 @@ return [
             'no' => 'Não',
         ],
     ],
+    'wallet' => [
+        'wallet' => 'Carteira',
+        'wallets' => 'Carteiras',
+        'columns' => [
+            'created_at' => 'Criado em',
+            'deleted_at' => 'Excluído em',
+            'updated_at' => 'Última atualização',
+            'description' => 'Descrição',
+            'balance' => 'Saldo',
+            'opening_balance' => 'Saldo inicial',
+            'person_id' => 'Pessoa',
+        ],
+    ],
 ];

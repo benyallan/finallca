@@ -99,4 +99,17 @@ return [
             'no' => 'No',
         ],
     ],
+    'wallet' => [
+        'wallet' => 'Wallet',
+        'wallets' => 'Wallets',
+        'columns' => [
+            'created_at' => 'Created at',
+            'deleted_at' => 'Deleted at',
+            'updated_at' => 'Updated at',
+            'description' => 'Description',
+            'balance' => 'Balance',
+            'opening_balance' => 'Opening balance',
+            'person_id' => 'Person',
+        ],
+    ],
 ];
