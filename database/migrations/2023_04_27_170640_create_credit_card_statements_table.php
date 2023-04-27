@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('credit_card_statements', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-            $table->nullableUuidMorphs('belonging_to');
-            $table->nullableUuidMorphs('details');
-            $table->uuidMorphs('accountable');
-            $table->date('date')->nullable();
-            $table->string('currency_code')->default('BRL');
-            $table->decimal('transaction_amount', 15, 2);
-            $table->string('description');
-            $table->boolean('done')->default(false);
-            $table->string('direction');
+            $table->foreignUuid('credit_card_id')->constrained()->cascadeOnDelete();
+            $table->date('start_date');
+            $table->date('end_date');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('credit_card_statements');
     }
 };

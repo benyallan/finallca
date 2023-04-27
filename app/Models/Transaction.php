@@ -47,4 +47,9 @@ class Transaction extends Model
     {
         return $this->morphTo();
     }
+
+    public function details(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }
