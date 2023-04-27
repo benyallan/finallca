@@ -17,7 +17,9 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class TransactionResource extends Resource
 {
@@ -134,6 +136,22 @@ class TransactionResource extends Resource
                                 fn (Builder $query, $date): Builder => $query->whereDate('date', '<=', $date),
                             );
                     }),
+                Tables\Filters\SelectFilter::make('accountable_type')
+                    ->options([
+                        Account::class => __('filament_resources.account.account'),
+                        CreditCard::class => __('filament_resources.credit_card.credit_card'),
+                        Wallet::class => __('filament_resources.wallet.wallet'),
+                    ])
+                    ->label(__('filament_resources.transaction.columns.accountable')),
+                Tables\Filters\SelectFilter::make('accountable_id')
+                    ->options(function () {
+                        $options = new Collection();
+                        $options = $options->merge(Account::all()->mapWithKeys(fn (Account $account): array => [$account->id => $account->label]));
+                        $options = $options->merge(CreditCard::all()->mapWithKeys(fn (CreditCard $creditCard): array => [$creditCard->id => $creditCard->label]));
+                        $options = $options->merge(Wallet::all()->mapWithKeys(fn (Wallet $wallet): array => [$wallet->id => $wallet->label]));
+                        return $options;
+                    })
+                    ->label(__('filament_resources.transaction.columns.accountable')),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
