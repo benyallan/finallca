@@ -8,4 +8,12 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAccount extends CreateRecord
 {
     protected static string $resource = AccountResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['user_id'] ?? auth()->id();
+        $data['balance'] = $data['opening_balance'];
+
+        return $data;
+    }
 }

@@ -17,7 +17,6 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
 
@@ -149,6 +148,7 @@ class TransactionResource extends Resource
                         $options = $options->merge(Account::all()->mapWithKeys(fn (Account $account): array => [$account->id => $account->label]));
                         $options = $options->merge(CreditCard::all()->mapWithKeys(fn (CreditCard $creditCard): array => [$creditCard->id => $creditCard->label]));
                         $options = $options->merge(Wallet::all()->mapWithKeys(fn (Wallet $wallet): array => [$wallet->id => $wallet->label]));
+
                         return $options;
                     })
                     ->label(__('filament_resources.transaction.columns.accountable')),

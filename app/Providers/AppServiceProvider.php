@@ -2,18 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Account;
-use App\Models\Bank;
-use App\Models\CreditCard;
-use App\Models\Person;
-use App\Models\Transaction;
-use App\Models\Wallet;
-use App\Observers\AccountObserver;
-use App\Observers\BankObserver;
-use App\Observers\CreditCardObserver;
-use App\Observers\PersonObserver;
-use App\Observers\TransactionObserver;
-use App\Observers\WalletObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,11 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Account::observe(AccountObserver::class);
-        Bank::observe(BankObserver::class);
-        Person::observe(PersonObserver::class);
-        CreditCard::observe(CreditCardObserver::class);
-        Transaction::observe(TransactionObserver::class);
-        Wallet::observe(WalletObserver::class);
+        //
     }
 }

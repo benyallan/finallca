@@ -24,6 +24,7 @@ class CreditCardStatementFactory extends ModelFactory
         if ($startDate->greaterThan(now())) {
             $startDate->subMonth();
         }
+
         return [
             'user_id' => User::factory(),
             'credit_card_id' => $creditCard->id,
